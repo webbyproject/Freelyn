@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FreelynSJ — Conectando talentos em São João del-Rei</title>
+  
+  <!-- Fontes externas do Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Barra de Navegação Superior -->
+  <nav>
+    <a class="nav-logo" href="#"><img src="assets\logosj.png" alt="FreelynSJ" /></a>
+    
+    <!-- Agrupa os seletores e botões de autenticação -->
+    <div class="nav-actions">
+      
+      <!-- Alternador de Abas Dinâmico -->
+      <div class="nav-tabs">
+        <div class="nav-tab active" data-type="estudante">Sou Estudante</div>
+        <div class="nav-tab"        data-type="empresa">Sou Empresa</div>
+      </div> <!-- /fim .nav-tabs -->
+      
+      <!-- Botões de Login e Cadastro -->
+      <div class="nav-auth">
+        <a href="#" id="nav-login"    class="btn btn-outline-light">Login</a>
+        <a href="#" id="nav-cadastro" class="btn btn-orange">Cadastro</a>
+      </div> <!-- /fim .nav-auth -->
+      
+    </div> <!-- /fim .nav-actions -->
+  </nav> <!-- /fim nav -->
+
+  <!-- Seção Principal de Boas-vindas (Hero) -->
+  <section class="hero">
+    <img class="hero-bg-image" src="assets\bgsj.png" alt="São João del-Rei" />
+    
+    <!-- Textos informativos da chamada inicial -->
+    <div class="hero-content">
+      <span class="hero-eyebrow">São João del-Rei · MG</span>
+      <h1>A plataforma que une o <em>talento</em> ao crescimento das empresas locais.</h1>
+      <p>Universitários encontram oportunidades de freelance. Pequenas empresas encontram os profissionais certos. Tudo em um só lugar — simples, direto e seguro.</p>
+    </div> <!-- /fim .hero-content -->
+  </section> <!-- /fim .hero -->
+
+  <!-- Barra com Métricas e Dados da plataforma -->
+  <div class="stats-bar">
+    <div class="stat-item">
+      <div class="stat-number">+200</div>
+      <div class="stat-label">Freelancers cadastrados</div>
+    </div> <!-- /fim .stat-item -->
+    
+    <div class="stat-item">
+      <div class="stat-number">+80</div>
+      <div class="stat-label">Empresas parceiras</div>
+    </div> <!-- /fim .stat-item -->
+    
+    <div class="stat-item">
+      <div class="stat-number">+350</div>
+      <div class="stat-label">Vagas publicadas</div>
+    </div> <!-- /fim .stat-item -->
+    
+    <div class="stat-item">
+      <div class="stat-number">100%</div>
+      <div class="stat-label">Gratuito para estudantes</div>
+    </div> <!-- /fim .stat-item -->
+  </div> <!-- /fim .stats-bar -->
+
+  <!-- Seção Passo a Passo descritivo -->
+  <section class="how">
+    <div style="max-width:1200px;margin:0 auto;">
+      <p class="section-label">Como funciona</p>
+      <h2 class="section-title">Em 3 passos, você está contratado.</h2>
+      <p class="section-sub">Nada de grupos de WhatsApp lotados ou perfis desatualizados no Facebook. Aqui é direto ao ponto.</p>
+      
+      <!-- Grid dos 3 passos do usuário -->
+      <div class="how-grid">
+        <div class="how-card">
+          <img src="assets\etapa01.png" alt="Ilustração de perfil" class="how-illustration">
+          <h3>Crie seu perfil</h3>
+          <p>Preencha suas experiências, habilidades e disponibilidade de horário. Leva menos de 5 minutos.</p>
+        </div> <!-- /fim .how-card -->
+        
+        <div class="how-card">
+          <img src="assets\etapa02.png" alt="Ilustração de perfil" class="how-illustration">
+          <h3>Explore as vagas</h3>
+          <p>Veja as oportunidades disponíveis com horário, local, função e salário — tudo detalhado na tela.</p>
+        </div> <!-- /fim .how-card -->
+        
+        <div class="how-card">
+          <img src="assets\etapa03.png" alt="Ilustração de perfil" class="how-illustration">
+          <h3>Firme o acordo</h3>
+          <p>Candidate-se, o empregador recebe a notificação e vocês conversam para fechar o combinado.</p>
+        </div> <!-- /fim .how-card -->
+      </div> <!-- /fim .how-grid -->
+      
+    </div> <!-- /fim div interna de largura máxima -->
+  </section> <!-- /fim .how -->
+
+  <!-- Seção das Categorias de Atuação -->
+  <section class="categories">
+    <div style="max-width:1200px;margin:0 auto;">
+    
+      <p class="section-label">Categorias</p>
+      <h2 class="section-title">Vagas para todo tipo de talento</h2>
+      <p class="section-sub">De serviços em bares e restaurantes à programação e marketing digital.</p>
+      
+      <!-- Grid exibindo os blocos de nichos de trabalho -->
+      <div class="cat-grid">
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\code.png" width="55"/></div><div class="cat-name">Programação</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\paleta.png" width="55"/></div><div class="cat-name">Ilustração Digital</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\megaphone.png" width="55"/></div><div class="cat-name">Marketing</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\video.png" width="55"/></div><div class="cat-name">Edição de Vídeo</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\kit.png" width="55"/></div><div class="cat-name">Bares & Restaurantes</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\camera.png" width="55"/></div><div class="cat-name">Fotografia</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\pen.png" width="55"/></div><div class="cat-name">Redação</div></div>
+        <div class="cat-chip"><div class="cat-icon"><img src="assets\music.png" width="55"/></div><div class="cat-name">Música & Eventos</div></div>
+      
+      <img src="assets\linha.png" class="imglinha" />
+      </div> <!-- /fim .cat-grid -->
+      
+    </div> <!-- /fim div interna de largura máxima -->
+  </section> <!-- /fim .categories -->
+
+  <!-- Seção Detalhada dos Perfis Alvo (Estudante vs Empresa) -->
+  <section class="for-who">
+    <div style="max-width:1200px;margin:0 auto;">
+      <p class="section-label">Para quem é?</p>
+      <h2 class="section-title">Dois lados, uma só plataforma.</h2>
+      <p class="section-sub">FreelynSJ foi pensado para resolver a dificuldade dos dois lados da equação.</p>
+      
+      <!-- Lado a lado de vantagens para os dois públicos -->
+      <div class="for-who-grid">
+        
+        <!-- Card focado nos Estudantes/Freelancers -->
+        <div class="profile-card orange-accent">
+          <span class="profile-tag tag-orange">Freelancer / Estudante</span>
+          <h3>Complemente sua renda enquanto estuda.</h3>
+          <p>Você não precisa mais depender de grupos de WhatsApp ou de perfis de Facebook que todo mundo largou. Encontre vagas perto de você, com transparência de salário e horário.</p>
+          <ul class="feature-list">
+            <li>Perfil profissional com bio e experiências</li>
+            <li>Candidatura com um clique</li>
+            <li>Vagas detalhadas: horário, local e salário</li>
+            <li>Acesso 100% gratuito</li>
+          </ul>
+        </div> <!-- /fim .profile-card (estudante) -->
+        
+        <!-- Card focado nos Empregadores -->
+        <div class="profile-card navy-accent">
+          <span class="profile-tag tag-navy">Empregador / Pequena Empresa</span>
+          <h3>Encontre o profissional certo para o fim de semana.</h3>
+          <p>Chega de boca-a-boca e de esperar que alguém do seu contato esteja disponível. Publique sua vaga e aguarde candidatos qualificados chegarem até você.</p>
+          <ul class="feature-list">
+            <li>Publicação de vagas com todos os detalhes</li>
+            <li>Notificação de candidatos em tempo real</li>
+            <li>Perfil e experiência do candidato visíveis</li>
+            <li>Chat direto para fechar acordo</li>
+          </ul>
+        </div> <!-- /fim .profile-card (empresa) -->
+        
+      </div> <!-- /fim .for-who-grid -->
+    </div> <!-- /fim div interna de largura máxima -->
+  </section> <!-- /fim .for-who -->
+
+  <!-- Banner Inferior de Chamada para Ação Final -->
+  <section class="cta-banner">
+    <h2>Pronto para começar?</h2>
+    <p>Cadastre-se agora e faça parte da comunidade de freelancers de São João del-Rei.</p>
+    <div class="cta-group">
+      <a href="#" class="btn-white">Sou um estudante</a>
+      <a href="#" class="btn-outline-white">Sou uma empresa</a>
+    </div> <!-- /fim .cta-group -->
+  </section> <!-- /fim .cta-banner -->
+
+  <!-- Rodapé Geral da Página -->
+  <footer>
+    <div style="max-width:1200px;margin:0 auto;">
+      
+      <!-- Área superior do rodapé (Links úteis) -->
+      <div class="footer-top">
+        <div class="footer-links">
+          <a href="#">Início</a>
+          <a href="#">Como funciona</a>
+          <a href="#">Categorias</a>
+          <a href="#">Cadastro de Estudante</a>
+          <a href="#">Cadastro de Empresa</a>
+        </div> <!-- /fim .footer-links -->
+      </div> <!-- /fim .footer-top -->
+      
+      <!-- Área inferior do rodapé (Copyright e localidade) -->
+      <div class="footer-bottom">
+        <p class="footer-copy">© 2026 FreelynSJ — Todos os direitos reservados.</p>
+        <p class="footer-senai">· São João del-Rei · MG</p>
+      </div> <!-- /fim .footer-bottom -->
+      
+    </div> <!-- /fim div interna de largura máxima -->
+  </footer> <!-- /fim footer -->
+
+  
+
+</body>
+</html>

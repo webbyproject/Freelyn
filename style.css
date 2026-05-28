@@ -1,0 +1,402 @@
+    :root {
+      --navy:      #1C2B3A;
+      --orange:    #D4743A;
+      --sand:      #F5EFE6;
+      --terracota: #B5513C;
+      --sky:       #8BB8D4;
+      --cream:     #FBF7F2;
+      --white:     #FFFFFF;
+      --text:      #1C2B3A;
+      --muted:     #6B7B8C;
+      --radius:    12px;
+      --shadow:    0 8px 32px rgba(28,43,58,.14);
+    }
+
+    /* ── Reset e Configurações Base do Navegador ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a  { text-decoration: none; color: inherit; }
+
+    /* ── Estilização do Topo (Navbar Fixa) ── */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--sky);
+      padding: 0 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 72px;
+      box-shadow: 0 2px 12px rgba(0,0,0,.25);
+      border-bottom: solid 2px var(--navy);
+    }
+    .nav-logo img { 
+      height: 110px; 
+      position: relative;
+      top: 25px; 
+      z-index: 101; 
+      transition: transform 0.2s ease;
+    }
+    .nav-actions { display: flex; align-items: center; gap: 16px; }
+
+    /* ── Alternador de abas (Estudante / Empresa) ── */
+    .nav-tabs {
+      display: flex;
+      background: rgba(255,255,255,.08);
+      border-radius: 10px;
+      padding: 4px;
+      gap: 2px;
+    }
+    .nav-tab {
+      padding: 7px 18px;
+      border-radius: 7px;
+      font-size: .82rem; font-weight: 600;
+      color: rgba(255,255,255,.5);
+      cursor: pointer;
+      transition: all .2s;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .nav-tab:hover { color: rgba(255,255,255,.85); }
+    .nav-tab.active {
+      background: var(--orange);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(212,116,58,.4);
+    }
+
+    /* ── Botões de Ação (Login e Cadastro) ── */
+    .nav-auth { display: flex; gap: 8px; align-items: center; }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 8px; font-family: 'DM Sans', sans-serif;
+      font-weight: 600; cursor: pointer; transition: all .2s;
+      white-space: nowrap;
+    }
+    .btn-outline-light {
+      border: 1.5px solid rgba(255,255,255,.35);
+      color: var(--white); background: transparent;
+      padding: 8px 20px; font-size: .88rem;
+    }
+    .btn-outline-light:hover { background: rgba(255,255,255,.1); border-color: var(--white); }
+
+    .btn-orange {
+      background: var(--orange); color: var(--white);
+      padding: 9px 22px; font-size: .88rem; border: none;
+    }
+    .btn-orange:hover { background: var(--terracota); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,116,58,.45); }
+
+    .btn-navy {
+      background: var(--navy); color: var(--white);
+      padding: 14px 32px; font-size: 1rem; border: none;
+    }
+    .btn-navy:hover { background: #263e54; transform: translateY(-1px); }
+
+    .nav-context-label {
+      font-size: .7rem; font-weight: 600; letter-spacing: .07em;
+      color: rgba(255,255,255,.38); text-transform: uppercase;
+      text-align: right; line-height: 1;
+      transition: opacity .2s;
+    }
+
+    /* ── Bloco de Apresentação (Hero Section) ── */
+    .hero {
+      position: relative; overflow: hidden;
+      background: var(--sky);
+      padding: 80px 5% 0;
+      min-height: 88vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .hero-content {
+      position: relative; z-index: 2;
+      max-width: 680px;
+      padding-bottom: 56px;
+    }
+    .hero-eyebrow {
+      display: inline-block;
+      background: var(--orange); color: var(--white);
+      font-size: .75rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 5px 14px; border-radius: 4px;
+      margin-bottom: 24px;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4.5vw, 3.6rem);
+      font-weight: 900;
+      line-height: 1.12;
+      color: var(--white);
+      margin-bottom: 20px;
+    }
+    .hero h1 em { color: var(--orange); font-style: normal; }
+    .hero p {
+      font-size: 1.05rem; line-height: 1.7;
+      color: rgba(255,255,255,.72);
+      max-width: 520px;
+      margin-bottom: 36px;
+    }
+    .hero-cta { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    /* Imagem de fundo da seção Hero */
+    .hero-bg-image {
+      position: absolute; right: 0; bottom: 0;
+      width: 62%; height: 110%; 
+      object-fit: cover; object-position: left center;
+      mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.6) 25%, black 55%);
+      -webkit-mask-image: linear-gradient(to right, transparent 0%, rgba(0,0,0,.6) 25%, black 55%);
+      opacity: 0.75; 
+      transform: translate(0px, 0px) scale(1.05);
+      transition: opacity 0.6s ease, transform 0.12s ease-out;
+      will-change: transform, opacity;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      height: 120px;
+      background: linear-gradient(to bottom, transparent, var(--cream));
+      z-index: 3;
+    }
+
+    /* ── Barra de Estatísticas ── */
+    .stats-bar {
+      background: var(--white);
+      border-bottom: 2px solid var(--sand);
+      padding: 28px 5%;
+      display: flex; justify-content: center; gap: 0;
+      flex-wrap: wrap;
+      
+    }
+    .stat-item {
+      text-align: center; padding: 8px 40px;
+      border-right: 1px solid var(--sand);
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 2rem; font-weight: 700; color: var(--orange);
+    }
+    .stat-label { font-size: .82rem; color: var(--muted); margin-top: 2px; font-weight: 500; }
+
+    /* ── Estilos Compartilhados de Títulos de Seção ── */
+    section { padding: 80px 5%; }
+    .section-label {
+      font-size: .72rem; font-weight: 700; letter-spacing: .14em;
+      text-transform: uppercase; color: var(--orange);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 3vw, 2.4rem);
+      font-weight: 700; line-height: 1.2;
+      color: var(--navy);
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      font-size: 1rem; color: var(--muted); line-height: 1.7;
+      max-width: 520px;
+    }
+
+    /* ── Seção: Como Funciona (Grid de Cards numéricos) ── */
+    .how { background: var(--cream); }
+    .how-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 28px;
+      margin-top: 48px;
+    }
+    .how-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 36px 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+      transition: transform .25s, box-shadow .25s;
+    }
+    .how-card:hover { transform: translateY(-4px); box-shadow: 0 16px 40px rgba(28,43,58,.15); }
+    .how-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0;
+      height: 4px; background: var(--orange);
+    }
+    .how-number {
+      font-family: 'Playfair Display', serif;
+      font-size: 3.5rem; font-weight: 900;
+      color: var(--orange); line-height: 1;
+      margin-bottom: 16px;
+    }
+    .how-card h3 { font-size: 1.05rem; font-weight: 700; margin-bottom: 10px; color: var(--navy); }
+    .how-card p { font-size: .9rem; color: var(--muted); line-height: 1.65; }
+
+    /* ── Seção: Categorias de Vagas (Chips em Grid) ── */
+    .categories { background: var(--navy); }
+    .categories .section-title { color: var(--white); }
+    .categories .section-label { color: var(--sky); }
+    .categories .section-sub { color: rgba(255,255,255,.6); }
+    .cat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 16px;
+      margin-top: 48px;
+    }
+    .cat-chip {
+      background: rgba(255,255,255,.07);
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 10px;
+      padding: 20px 18px;
+      text-align: center;
+      cursor: pointer;
+      transition: all .2s;
+    }
+    .cat-chip:hover {
+      background: var(--orange);
+      border-color: var(--orange);
+      transform: translateY(-2px);
+    }
+    .cat-icon { font-size: 1.8rem; margin-bottom: 10px; justify-content: center; align-items: center; display: flex;}
+    .cat-name { font-size: .85rem; font-weight: 600; color: var(--white); }
+
+    /* ── Seção: Para Quem É (Cards comparativos com listas de checks) ── */
+    .for-who { background: var(--sand); }
+    .for-who-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 28px; margin-top: 48px;
+    }
+    .profile-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 40px 36px;
+      box-shadow: var(--shadow);
+      position: relative; overflow: hidden;
+    }
+    .profile-card.orange-accent::after {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 120px; height: 120px; background: var(--orange); opacity: .06;
+      border-radius: 50% 0 0 0;
+    }
+    .profile-card.navy-accent::after {
+      content: ''; position: absolute; bottom: 0; right: 0;
+      width: 120px; height: 120px; background: var(--navy); opacity: .06;
+      border-radius: 50% 0 0 0;
+    }
+    .profile-tag {
+      display: inline-block;
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; padding: 4px 12px; border-radius: 4px;
+      margin-bottom: 20px;
+    }
+    .tag-orange { background: #FDE9D9; color: var(--orange); }
+    .tag-navy   { background: #D9E4F0; color: var(--navy); }
+    .profile-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem; font-weight: 700;
+      color: var(--navy); margin-bottom: 14px;
+    }
+    .profile-card p { font-size: .92rem; color: var(--muted); line-height: 1.7; margin-bottom: 28px; }
+    .feature-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .feature-list li {
+      display: flex; align-items: center; gap: 10px;
+      font-size: .88rem; color: var(--text); font-weight: 500;
+    }
+    .feature-list li::before {
+      content: '✓';
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 22px; height: 22px; border-radius: 50%;
+      background: var(--orange); color: var(--white);
+      font-size: .7rem; font-weight: 800; flex-shrink: 0;
+    }
+    
+
+    /* ── Banner de Chamada para Ação Final (CTA) ── */
+    .cta-banner {
+      position: relative; overflow: hidden;
+      padding: 80px 5%;
+      background: var(--orange);
+      text-align: center;
+    }
+    .cta-banner::before {
+      content: ''; position: absolute; inset: 0;
+      background: url('assets/bgsj.png') center/cover no-repeat; opacity: .12;
+    }
+    .cta-banner h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 3rem);
+      color: var(--white); font-weight: 900;
+      position: relative; z-index: 1; margin-bottom: 14px;
+    }
+    .cta-banner p {
+      color: rgba(255,255,255,.85); font-size: 1.05rem;
+      position: relative; z-index: 1; margin-bottom: 36px;
+      max-width: 480px; margin-inline: auto;
+    }
+    .cta-group { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; position: relative; z-index: 1; }
+    
+    .btn-white {
+      background: var(--white); color: var(--orange);
+      padding: 14px 32px; font-size: 1rem; border: none;
+      border-radius: 8px; font-weight: 700; cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-white:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,.2); }
+    
+    .btn-outline-white {
+      background: transparent; color: var(--white);
+      padding: 14px 32px; font-size: 1rem;
+      border: 2px solid rgba(255,255,255,.6);
+      border-radius: 8px; font-weight: 700; cursor: pointer;
+      transition: all .2s;
+    }
+    .btn-outline-white:hover { border-color: var(--white); background: rgba(255,255,255,.1); }
+
+    /* ── Rodapé (Footer) ── */
+    footer { background: var(--navy); padding: 48px 5% 28px; }
+    .footer-top {
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 24px; padding-bottom: 32px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+    .footer-logo img { height: 70px; }
+    .footer-tagline { font-size: .85rem; color: rgba(255,255,255,.45); margin-top: 6px; }
+    .footer-links { display: flex; gap: 32px; flex-wrap: wrap; }
+    .footer-links a { font-size: .88rem; color: rgba(255,255,255,.6); font-weight: 500; transition: color .2s; }
+    .footer-links a:hover { color: var(--orange); }
+    .footer-bottom {
+      padding-top: 24px;
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-copy { font-size: .78rem; color: rgba(255,255,255,.3); }
+    .footer-senai {
+      font-size: .78rem; color: rgba(255,255,255,.35);
+      display: flex; align-items: center; gap: 6px;
+    }
+    .footer-senai span { color: var(--orange); font-weight: 700; }
+
+    /* ── Responsividade (Ajustes para Tablets e Smartphones) ── */
+    @media (max-width: 768px) {
+      .hero-bg-image { width: 100%; mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,.4) 40%, black); -webkit-mask-image: linear-gradient(to bottom, transparent, rgba(0,0,0,.4) 40%, black); opacity: .35; }
+      .for-who-grid { grid-template-columns: 1fr; }
+      .stat-item { padding: 8px 20px; }
+      .nav-tab { padding: 6px 12px; font-size: .76rem; }
+    }
+    @media (max-width: 480px) {
+      nav { padding: 0 4%; }
+      .nav-logo img { height: 36px; }
+      .nav-tab { padding: 5px 10px; font-size: .72rem; }
+      .btn-outline-light { padding: 7px 12px; font-size: .8rem; }
+      .btn-orange        { padding: 7px 14px; font-size: .8rem; }
+    }
+
+.how-illustration {
+    width: 520px;       /* Ajuste o tamanho conforme preferir */
+    height: auto;
+    margin-bottom: 20px; /* Espaço entre a imagem e o número 01 */
+    display: block;      /* Garante que ela ocupe uma linha própria */
+
+}
+
+.imglinha{
+    
+}
