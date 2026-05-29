@@ -1,3 +1,3 @@
 <?php
 //RECEBE OS DADOS ENVIADOS PELO FORMULÁRIO POST
-$nome =
+$nome = f
