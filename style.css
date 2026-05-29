@@ -389,6 +389,113 @@
       .btn-orange        { padding: 7px 14px; font-size: .8rem; }
     }
 
+/* ── Modal de Cadastro de Estudante ── */
+.modal-overlay {
+  position: fixed; inset: 0; z-index: 999;
+  background: rgba(28, 43, 58, 0.72);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px;
+  opacity: 0; pointer-events: none;
+  transition: opacity .3s ease;
+}
+.modal-overlay.active {
+  opacity: 1; pointer-events: all;
+}
+
+.modal {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 48px 44px;
+  width: 100%; max-width: 480px;
+  box-shadow: 0 32px 80px rgba(28,43,58,.35);
+  position: relative;
+  transform: translateY(24px) scale(.97);
+  transition: transform .35s cubic-bezier(.34,1.56,.64,1);
+}
+.modal-overlay.active .modal {
+  transform: translateY(0) scale(1);
+}
+
+.modal-close {
+  position: absolute; top: 18px; right: 20px;
+  background: var(--sand); border: none;
+  width: 36px; height: 36px; border-radius: 50%;
+  font-size: 1.1rem; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); transition: all .2s;
+}
+.modal-close:hover { background: var(--orange); color: var(--white); }
+
+.modal-tag {
+  display: inline-block;
+  font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+  text-transform: uppercase; padding: 4px 12px; border-radius: 4px;
+  background: #FDE9D9; color: var(--orange);
+  margin-bottom: 16px;
+}
+
+.modal h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.65rem; font-weight: 900;
+  color: var(--navy); margin-bottom: 6px;
+}
+.modal-subtitle {
+  font-size: .88rem; color: var(--muted); margin-bottom: 32px; line-height: 1.55;
+}
+
+.form-group { margin-bottom: 18px; }
+.form-group label {
+  display: block; font-size: .78rem; font-weight: 700;
+  color: var(--navy); margin-bottom: 7px; letter-spacing: .03em;
+  text-transform: uppercase;
+}
+.form-group input {
+  width: 100%; padding: 12px 16px;
+  border: 1.5px solid #E2E8F0;
+  border-radius: 10px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: .92rem; color: var(--text);
+  background: var(--cream);
+  transition: border-color .2s, box-shadow .2s;
+  outline: none;
+}
+.form-group input:focus {
+  border-color: var(--orange);
+  box-shadow: 0 0 0 3px rgba(212,116,58,.12);
+  background: var(--white);
+}
+.form-group input::placeholder { color: #AAB4BE; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+
+.modal-submit {
+  width: 100%; margin-top: 8px;
+  background: var(--orange); color: var(--white);
+  border: none; border-radius: 10px;
+  padding: 14px; font-family: 'DM Sans', sans-serif;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  transition: all .2s;
+}
+.modal-submit:hover { background: var(--terracota); transform: translateY(-1px); box-shadow: 0 6px 20px rgba(212,116,58,.4); }
+
+.modal-login-hint {
+  text-align: center; font-size: .82rem;
+  color: var(--muted); margin-top: 18px;
+}
+.modal-login-hint a { color: var(--orange); font-weight: 600; }
+.modal-login-hint a:hover { text-decoration: underline; }
+
+.form-divider {
+  height: 1px; background: var(--sand); margin: 8px 0 20px;
+}
+
+@media (max-width: 520px) {
+  .modal { padding: 36px 24px; }
+  .form-row { grid-template-columns: 1fr; gap: 0; }
+}
+
 .how-illustration {
     width: 520px;       /* Ajuste o tamanho conforme preferir */
     height: auto;
