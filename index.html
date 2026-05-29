@@ -215,42 +215,36 @@
       
       <div class="form-divider"></div>
 
-      <div id="cadastro-form">
-        <div class="form-group">
-          <label for="campo-nome">Nome completo</label>
-          <input type="text" id="campo-nome" placeholder="Ex.: Maria Fernanda Silva" autocomplete="name" />
-        </div>
-
-        <div class="form-row">
+      <!-- Formulário de cadastro que o PHP ir´´a utilizar-->
+        <form id="cadastro-form" action="processa.php" method="POST"> 
           <div class="form-group">
-            <label for="campo-cpf">CPF</label>
-            <input type="text" id="campo-cpf" placeholder="000.000.000-00" maxlength="14" />
+            <label for="campo-nome">Nome completo</label>
+            <input type="text" id="campo-nome" name="nomeCadastro" placeholder="Ex.: Maria Fernanda Silva" autocomplete="name" />
           </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="campo-cpf">CPF</label>
+              <input type="text" id="campo-cpf" name="cpf" placeholder="000.000.000-00" maxlength="14" />
+            </div>
+            <div class="form-group">
+              <label for="campo-usuario">Usuário</label>
+              <input type="text" id="campo-usuario" name="usuario" placeholder="@seu_usuario" />
+            </div>
+          </div>
+
           <div class="form-group">
-            <label for="campo-usuario">Usuário</label>
-            <input type="text" id="campo-usuario" placeholder="@seu_usuario" />
+            <label for="campo-email">E-mail</label>
+            <input type="email" id="campo-email" name="email" placeholder="voce@email.com" autocomplete="email" />
           </div>
-        </div>
 
-        <div class="form-group">
-          <label for="campo-email">E-mail</label>
-          <input type="email" id="campo-email" placeholder="voce@email.com" autocomplete="email" />
-        </div>
+          <div class="form-group">
+            <label for="campo-senha">Senha</label>
+            <input type="password" id="campo-senha" name="senha" placeholder="Mínimo 8 caracteres" />
+          </div>
 
-        <div class="form-group">
-          <label for="campo-senha">Senha</label>
-          <input type="password" id="campo-senha" placeholder="Mínimo 8 caracteres" />
-        </div>
-
-        <button class="modal-submit" id="btn-finalizar-cadastro">Criar minha conta →</button>
-      </div>
-
-      <!-- Mensagem de sucesso (inicialmente oculta) -->
-      <div id="cadastro-sucesso" style="display:none; text-align:center; padding: 20px 0;">
-        <div style="font-size:3rem; margin-bottom:16px;">🎉</div>
-        <h3 style="font-family:'Playfair Display',serif; color:var(--navy); margin-bottom:10px;">Cadastro realizado!</h3>
-        <p style="color:var(--muted); font-size:.92rem; line-height:1.6;">Bem-vindo(a) à FreelynSJ, <strong id="nome-confirmado"></strong>!<br>Agora é só explorar as vagas disponíveis.</p>
-      </div>
+          <button type="submit" class="modal-submit">Criar minha conta →</button>
+        </form>
 
       <p class="modal-login-hint">Já tem conta? <a href="#login-estudante">Fazer login</a></p>
     </div>
@@ -312,11 +306,7 @@
   }
 
   function resetarForm() {                                         // Função que "limpa" tudo
-    document.getElementById('cadastro-form').style.display = 'block';    // Garante que o formulário apareça
-    document.getElementById('cadastro-sucesso').style.display = 'none';  // Garante que a mensagem de sucesso suma
-    ['campo-nome','campo-cpf','campo-usuario','campo-email','campo-senha'].forEach(id => {
-      document.getElementById(id).value = '';                      // Esvazia cada um dos campos de texto
-    });
+    document.getElementById("cadastro-form").reset();
   }
 
   // ── Eventos para abrir e fechar o Modal ──
@@ -338,28 +328,7 @@
     if (e.key === 'Escape') fecharModal();
   });
 
-  // ── Lógica de Envio do Formulário ──
-  document.getElementById('btn-finalizar-cadastro').addEventListener('click', function () {
-    const nome    = document.getElementById('campo-nome').value.trim();    // Pega o nome e tira espaços extras
-    const cpf     = document.getElementById('campo-cpf').value.trim();     // Pega o CPF
-    const usuario = document.getElementById('campo-usuario').value.trim(); // Pega o usuário
-    const email   = document.getElementById('campo-email').value.trim();   // Pega o e-mail
-    const senha   = document.getElementById('campo-senha').value;          // Pega a senha (sem trim para aceitar espaços)
-
-    if (!nome || !cpf || !usuario || !email || !senha) {           // Validação: Se algum campo estiver vazio...
-      alert('Por favor, preencha todos os campos antes de continuar.');
-      return;                                                      // Para o código aqui (não envia)
-    }
-    if (senha.length < 8) {                                        // Validação: Senha muito curta...
-      alert('A senha precisa ter pelo menos 8 caracteres.');
-      return;                                                      // Para o código aqui
-    }
-
-    // Se passou pelas validações:
-    document.getElementById('nome-confirmado').textContent = nome.split(' ')[0]; // Pega só o primeiro nome
-    document.getElementById('cadastro-form').style.display  = 'none';            // Esconde o formulário
-    document.getElementById('cadastro-sucesso').style.display = 'block';         // Mostra a mensagem de festa 🎉
-  });
+  
   </script>
 
 </body>
