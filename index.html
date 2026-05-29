@@ -210,7 +210,7 @@
       <button class="modal-close" id="modal-close-btn" aria-label="Fechar">✕</button>
       
       <span class="modal-tag">Freelancer / Estudante</span>
-      <h2 id="modal-title">Crie sua conta grátis</h2>
+      <h2 id="modal-title">Crie sua conta</h2>
       <p class="modal-subtitle">Preencha os dados abaixo para entrar na comunidade FreelynSJ.</p>
       
       <div class="form-divider"></div>
@@ -261,103 +261,105 @@
     // Script unificado — navbar + modal
     // ══════════════════════════════════════════
 
-    // ── Referências únicas ──
-    const tabs         = document.querySelectorAll('.nav-tab');
-    const btnLogin     = document.getElementById('nav-login');
-    const btnCadastro  = document.getElementById('nav-cadastro');
-    const overlay      = document.getElementById('modal-cadastro-estudante');
-    const btnFechar    = document.getElementById('modal-close-btn');
+    // ── Referências únicas: Seleciona os elementos do HTML para usar no JS ──
+  const tabs         = document.querySelectorAll('.nav-tab');       // Pega todas as abas (Estudante/Empresa)
+  const btnLogin     = document.getElementById('nav-login');       // Pega o botão de Login pelo ID
+  const btnCadastro  = document.getElementById('nav-cadastro');    // Pega o botão de Cadastro pelo ID
+  const overlay      = document.getElementById('modal-cadastro-estudante'); // Pega o fundo escuro do modal
+  const btnFechar    = document.getElementById('modal-close-btn'); // Pega o botão 'X' de fechar o modal
 
-    // ── Lógica das Abas da Navbar ──
-    const routes = {
-      estudante: { login: '#login-estudante', cadastro: '#cadastro-estudante' },
-      empresa:   { login: '#login-empresa',   cadastro: '#cadastro-empresa'   },
-    };
+  // ── Lógica das Abas da Navbar ──
+  const routes = {                                                 // Objeto que guarda os links de cada tipo
+    estudante: { login: '#login-estudante', cadastro: '#cadastro-estudante' },
+    empresa:   { login: '#login-empresa',   cadastro: '#cadastro-empresa'   },
+  };
 
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
-        tab.classList.add('active');
+  tabs.forEach(tab => {                                            // Para cada aba encontrada...
+    tab.addEventListener('click', () => {                          // Adiciona um evento de clique
+      tabs.forEach(t => t.classList.remove('active'));             // Remove a cor de "ativo" das outras abas
+      tab.classList.add('active');                                 // Adiciona a cor de "ativo" na aba clicada
 
-        const type = tab.dataset.type;
-        btnLogin.href    = routes[type].login;
-        btnCadastro.href = routes[type].cadastro;
+      const type = tab.dataset.type;                               // Lê o atributo "data-type" (estudante ou empresa)
+      btnLogin.href    = routes[type].login;                       // Muda o link do botão Login dinamicamente
+      btnCadastro.href = routes[type].cadastro;                    // Muda o link do botão Cadastro dinamicamente
 
-        [btnLogin, btnCadastro].forEach(btn => {
-          btn.style.transform = 'scale(1.07)';
-          setTimeout(() => { btn.style.transform = ''; }, 180);
-        });
+      [btnLogin, btnCadastro].forEach(btn => {                     // Cria um efeito visual de "pulo" ao trocar
+        btn.style.transform = 'scale(1.07)';                       // Aumenta o tamanho levemente
+        setTimeout(() => { btn.style.transform = ''; }, 180);      // Volta ao normal após 180 milissegundos
       });
     });
+  });
 
-    // ── Máscara de CPF ──
-    document.getElementById('campo-cpf').addEventListener('input', function () {
-      let v = this.value.replace(/\D/g, '').slice(0, 11);
-      if (v.length > 9)      v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4');
-      else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');
-      else if (v.length > 3) v = v.replace(/(\d{3})(\d{1,3})/, '$1.$2');
-      this.value = v;
+  // ── Máscara de CPF: Formata enquanto o usuário digita ──
+  document.getElementById('campo-cpf').addEventListener('input', function () {
+    let v = this.value.replace(/\D/g, '').slice(0, 11);            // Remove tudo que não for número e limita a 11 digitos
+    if (v.length > 9)      v = v.replace(/(\d{3})(\d{3})(\d{3})(\d{1,2})/, '$1.$2.$3-$4'); // Formato: 000.000.000-00
+    else if (v.length > 6) v = v.replace(/(\d{3})(\d{3})(\d{1,3})/, '$1.$2.$3');           // Formato: 000.000.000
+    else if (v.length > 3) v = v.replace(/(\d{3})(\d{1,3})/, '$1.$2');                    // Formato: 000.000
+    this.value = v;                                                // Atualiza o valor do campo com os pontos e traço
+  });
+
+  // ── Funções de Controle do Modal (Janela Pop-up) ──
+  function abrirModal() {
+    overlay.classList.add('active');                               // Mostra o modal (muda o CSS para visível)
+    document.body.style.overflow = 'hidden';                       // Trava o scroll da página ao fundo
+    resetarForm();                                                 // Limpa os campos para uma nova digitação
+  }
+
+  function fecharModal() {
+    overlay.classList.remove('active');                            // Esconde o modal
+    document.body.style.overflow = '';                             // Devolve o scroll para a página
+  }
+
+  function resetarForm() {                                         // Função que "limpa" tudo
+    document.getElementById('cadastro-form').style.display = 'block';    // Garante que o formulário apareça
+    document.getElementById('cadastro-sucesso').style.display = 'none';  // Garante que a mensagem de sucesso suma
+    ['campo-nome','campo-cpf','campo-usuario','campo-email','campo-senha'].forEach(id => {
+      document.getElementById(id).value = '';                      // Esvazia cada um dos campos de texto
     });
+  }
 
-    // ── Abrir / Fechar Modal ──
-    function abrirModal() {
-      overlay.classList.add('active');
-      document.body.style.overflow = 'hidden';
-      resetarForm();
+  // ── Eventos para abrir e fechar o Modal ──
+  btnCadastro.addEventListener('click', function (e) {             // Ao clicar no botão de cadastro da Nav...
+    const abaAtiva = document.querySelector('.nav-tab.active');    // Verifica qual aba está selecionada
+    if (abaAtiva && abaAtiva.dataset.type === 'estudante') {       // Se for estudante:
+      e.preventDefault();                                          // Impede o link de navegar (não muda de página)
+      abrirModal();                                                // Abre a janelinha de cadastro
+    }
+  });
+
+  btnFechar.addEventListener('click', fecharModal);                // Fecha ao clicar no 'X'
+
+  overlay.addEventListener('click', function (e) {                 // Fecha se o usuário clicar fora da caixa branca
+    if (e.target === overlay) fecharModal();
+  });
+
+  document.addEventListener('keydown', function (e) {              // Fecha se o usuário apertar a tecla 'Esc'
+    if (e.key === 'Escape') fecharModal();
+  });
+
+  // ── Lógica de Envio do Formulário ──
+  document.getElementById('btn-finalizar-cadastro').addEventListener('click', function () {
+    const nome    = document.getElementById('campo-nome').value.trim();    // Pega o nome e tira espaços extras
+    const cpf     = document.getElementById('campo-cpf').value.trim();     // Pega o CPF
+    const usuario = document.getElementById('campo-usuario').value.trim(); // Pega o usuário
+    const email   = document.getElementById('campo-email').value.trim();   // Pega o e-mail
+    const senha   = document.getElementById('campo-senha').value;          // Pega a senha (sem trim para aceitar espaços)
+
+    if (!nome || !cpf || !usuario || !email || !senha) {           // Validação: Se algum campo estiver vazio...
+      alert('Por favor, preencha todos os campos antes de continuar.');
+      return;                                                      // Para o código aqui (não envia)
+    }
+    if (senha.length < 8) {                                        // Validação: Senha muito curta...
+      alert('A senha precisa ter pelo menos 8 caracteres.');
+      return;                                                      // Para o código aqui
     }
 
-    function fecharModal() {
-      overlay.classList.remove('active');
-      document.body.style.overflow = '';
-    }
-
-    function resetarForm() {
-      document.getElementById('cadastro-form').style.display = 'block';
-      document.getElementById('cadastro-sucesso').style.display = 'none';
-      ['campo-nome','campo-cpf','campo-usuario','campo-email','campo-senha'].forEach(id => {
-        document.getElementById(id).value = '';
-      });
-    }
-
-    btnCadastro.addEventListener('click', function (e) {
-      const abaAtiva = document.querySelector('.nav-tab.active');
-      if (abaAtiva && abaAtiva.dataset.type === 'estudante') {
-        e.preventDefault();
-        abrirModal();
-      }
-    });
-
-    btnFechar.addEventListener('click', fecharModal);
-
-    overlay.addEventListener('click', function (e) {
-      if (e.target === overlay) fecharModal();
-    });
-
-    document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') fecharModal();
-    });
-
-    // ── Envio do Formulário ──
-    document.getElementById('btn-finalizar-cadastro').addEventListener('click', function () {
-      const nome    = document.getElementById('campo-nome').value.trim();
-      const cpf     = document.getElementById('campo-cpf').value.trim();
-      const usuario = document.getElementById('campo-usuario').value.trim();
-      const email   = document.getElementById('campo-email').value.trim();
-      const senha   = document.getElementById('campo-senha').value;
-
-      if (!nome || !cpf || !usuario || !email || !senha) {
-        alert('Por favor, preencha todos os campos antes de continuar.');
-        return;
-      }
-      if (senha.length < 8) {
-        alert('A senha precisa ter pelo menos 8 caracteres.');
-        return;
-      }
-
-      document.getElementById('nome-confirmado').textContent = nome.split(' ')[0];
-      document.getElementById('cadastro-form').style.display  = 'none';
-      document.getElementById('cadastro-sucesso').style.display = 'block';
-    });
+    // Se passou pelas validações:
+    document.getElementById('nome-confirmado').textContent = nome.split(' ')[0]; // Pega só o primeiro nome
+    document.getElementById('cadastro-form').style.display  = 'none';            // Esconde o formulário
+    document.getElementById('cadastro-sucesso').style.display = 'block';         // Mostra a mensagem de festa 🎉
+  });
   </script>
 
 </body>
