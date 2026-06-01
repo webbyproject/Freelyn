@@ -259,19 +259,15 @@
 
       <!-- Cabeçalho laranja -->
       <div class="login-header login-header-estudante">
-        <span class="login-icone">🎓</span>
         <div>
           <p class="login-header-label">Área do Freelancer</p>
-          <h2 class="login-header-titulo">Login <span>Estudante</span></h2>
+          
         </div>
       </div>
 
-      <!-- Divisória linha.png -->
-      <div class="login-divisoria">
-        <img src="assets/linha.png" alt="" class="login-linha-img" />
-      </div>
+     
 
-      <div id="login-form-estudante">
+      <form id="login-form-estudante">
         <div class="form-group">
           <label for="login-usuario-est">Usuário ou e-mail</label>
           <input type="text" id="login-usuario-est" name="loginUsuario"
@@ -281,14 +277,14 @@
           <label for="login-senha-est">Senha</label>
           <input type="password" id="login-senha-est" name="loginSenha"
             placeholder="Digite sua senha" autocomplete="current-password" />
-          <button type="button" class="toggle-senha" data-target="login-senha-est">mostrar</button>
+          
         </div>
         <div style="text-align:right; margin-top:-6px; margin-bottom:20px;">
           <a href="#" style="font-size:.8rem; color:var(--orange); font-weight:500;">Esqueci minha senha</a>
         </div>
         <div class="login-erro" id="erro-estudante"></div>
         <button class="modal-submit modal-submit-estudante" id="btn-entrar-estudante">Entrar →</button>
-      </div>
+      </form>
 
       <p class="modal-login-hint">
         Não tem conta? <a href="#" id="link-cadastro-de-login">Criar conta grátis</a>
@@ -317,7 +313,7 @@
         <img src="assets/linha.png" alt="" class="login-linha-img login-linha-empresa" />
       </div>
 
-      <div id="login-form-empresa">
+      <form id="login-form-empresa">
         <div class="form-group">
           <label for="login-usuario-emp">Usuário ou e-mail</label>
           <input type="text" id="login-usuario-emp" name="loginUsuario"
@@ -334,7 +330,7 @@
         </div>
         <div class="login-erro login-erro-empresa" id="erro-empresa"></div>
         <button class="modal-submit modal-submit-empresa" id="btn-entrar-empresa">Entrar →</button>
-      </div>
+      </form>
 
       <p class="modal-login-hint modal-login-hint-empresa">
         Quer cadastrar sua empresa? <a href="#" style="color:var(--sky);">Fale conosco</a>
