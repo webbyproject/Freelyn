@@ -500,6 +500,72 @@
   .form-row { grid-template-columns: 1fr; gap: 0; }
 }
 
+/* ════════════════════════════════
+   Modal de Login Unificado
+   ════════════════════════════════ */
+
+/* Título "Estudante / Empresa" com cores diferentes */
+.login-duo-header {
+  margin-bottom: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: .01em;
+}
+.login-duo-estudante {
+  color: var(--orange);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.login-duo-empresa {
+  color: var(--sky);
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.login-duo-sep {
+  color: #C5CDD5;
+  font-weight: 300;
+}
+
+/* Divisória com linha.png */
+.login-divisoria {
+  width: 100%;
+  display: flex; align-items: center; justify-content: center;
+  margin: 14px 0 18px;
+  overflow: hidden;
+}
+.login-linha-img {
+  width: 100%; max-width: 360px;
+  height: auto; opacity: .82; display: block;
+}
+
+/* Seletor de perfil */
+.login-tipo-selector {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 10px; margin-bottom: 4px;
+}
+.login-tipo-btn {
+  display: flex; align-items: center; justify-content: center;
+  padding: 11px 10px; border-radius: 10px;
+  border: 2px solid var(--sand); background: var(--cream);
+  font-family: 'DM Sans', sans-serif;
+  font-size: .88rem; font-weight: 600; color: var(--muted);
+  cursor: pointer; transition: all .2s;
+}
+.login-tipo-btn:hover { border-color: var(--muted); color: var(--text); }
+
+/* Estado ativo: Estudante = laranja */
+.login-tipo-estudante.active {
+  border-color: var(--orange);
+  background: #FDE9D9;
+  color: var(--orange);
+}
+/* Estado ativo: Empresa = azul */
+.login-tipo-empresa.active {
+  border-color: var(--sky);
+  background: #D9E4F0;
+  color: var(--navy);
+}
+
 .how-illustration {
     width: 520px;       /* Ajuste o tamanho conforme preferir */
     height: auto;
