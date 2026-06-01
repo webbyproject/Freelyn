@@ -250,90 +250,111 @@
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════════
-       Modal de Login Unificado
-  ════════════════════════════════════════════ -->
-  <div class="modal-overlay" id="modal-login" role="dialog" aria-modal="true" aria-labelledby="modal-login-title">
-    <div class="modal">
-      <button class="modal-close" id="modal-close-login" aria-label="Fechar">✕</button>
+  <!-- ═══════════════════════════════════════════
+       Modal de Login — ESTUDANTE (tema laranja)
+  ════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-login-estudante" role="dialog" aria-modal="true">
+    <div class="modal modal-estudante">
+      <button class="modal-close modal-close-estudante" id="fechar-login-estudante" aria-label="Fechar">✕</button>
 
-      <!-- Título com as duas palavras coloridas -->
-      <div class="login-duo-header">
-        <span class="login-duo-estudante">Estudante</span>
-        <span class="login-duo-sep"> / </span>
-        <span class="login-duo-empresa">Empresa</span>
+      <!-- Cabeçalho laranja -->
+      <div class="login-header login-header-estudante">
+        <span class="login-icone">🎓</span>
+        <div>
+          <p class="login-header-label">Área do Freelancer</p>
+          <h2 class="login-header-titulo">Login <span>Estudante</span></h2>
+        </div>
       </div>
 
-      <h2 id="modal-login-title">Acesse sua conta</h2>
-      <p class="modal-subtitle">Uma entrada para os dois perfis. Selecione o seu abaixo.</p>
-
-
-      <!-- Seletor de perfil -->
-      <div class="login-tipo-selector">
-        <button class="login-tipo-btn login-tipo-estudante active" data-perfil="estudante">
-          Sou Estudante
-        </button>
-        <button class="login-tipo-btn login-tipo-empresa" data-perfil="empresa">
-          Sou Empresa
-        </button>
+      <!-- Divisória linha.png -->
+      <div class="login-divisoria">
+        <img src="assets/linha.png" alt="" class="login-linha-img" />
       </div>
 
-      <!-- Campos do formulário -->
-      <div id="login-form">
-        <div class="form-group" style="margin-top:18px;">
-          <label for="login-usuario">Usuário ou e-mail</label>
-          <input type="text" id="login-usuario" name="loginUsuario"
+      <div id="login-form-estudante">
+        <div class="form-group">
+          <label for="login-usuario-est">Usuário ou e-mail</label>
+          <input type="text" id="login-usuario-est" name="loginUsuario"
             placeholder="@seu_usuario ou voce@email.com" autocomplete="username" />
         </div>
-
         <div class="form-group" style="position:relative;">
-          <label for="login-senha">Senha</label>
-          <input type="password" id="login-senha" name="loginSenha"
+          <label for="login-senha-est">Senha</label>
+          <input type="password" id="login-senha-est" name="loginSenha"
             placeholder="Digite sua senha" autocomplete="current-password" />
-          <button type="button" id="toggle-senha-login" style="
-            position:absolute; right:14px; bottom:12px; background:none;
-            border:none; cursor:pointer; color:var(--muted);
-            font-size:.78rem; font-weight:600; padding:0;
-          ">mostrar</button>
+          <button type="button" class="toggle-senha" data-target="login-senha-est">mostrar</button>
         </div>
-
         <div style="text-align:right; margin-top:-6px; margin-bottom:20px;">
-          <a href="#" style="font-size:.8rem; color:var(--muted); font-weight:500;">
-            Esqueci minha senha
-          </a>
+          <a href="#" style="font-size:.8rem; color:var(--orange); font-weight:500;">Esqueci minha senha</a>
         </div>
-
-        <!-- Mensagem de erro (oculta por padrão) -->
-        <div id="login-erro" style="
-          display:none; background:#FDE9D9; border:1.5px solid var(--orange);
-          border-radius:8px; padding:10px 14px; margin-bottom:14px;
-          font-size:.84rem; color:var(--terracota); font-weight:600; text-align:center;
-        "></div>
-
-        <button class="modal-submit" id="btn-entrar-login">Entrar →</button>
+        <div class="login-erro" id="erro-estudante"></div>
+        <button class="modal-submit modal-submit-estudante" id="btn-entrar-estudante">Entrar →</button>
       </div>
 
-      <p class="modal-login-hint" id="login-hint-cadastro">
-        Não tem conta? <a href="#" id="link-abrir-cadastro">Criar conta grátis</a>
+      <p class="modal-login-hint">
+        Não tem conta? <a href="#" id="link-cadastro-de-login">Criar conta grátis</a>
+      </p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════
+       Modal de Login — EMPRESA (tema azul)
+  ════════════════════════════════════════════════ -->
+  <div class="modal-overlay" id="modal-login-empresa" role="dialog" aria-modal="true">
+    <div class="modal modal-empresa">
+      <button class="modal-close modal-close-empresa" id="fechar-login-empresa" aria-label="Fechar">✕</button>
+
+      <!-- Cabeçalho azul -->
+      <div class="login-header login-header-empresa">
+        <span class="login-icone">🏢</span>
+        <div>
+          <p class="login-header-label">Área do Empregador</p>
+          <h2 class="login-header-titulo">Login <span>Empresa</span></h2>
+        </div>
+      </div>
+
+      <!-- Divisória linha.png com tint azul -->
+      <div class="login-divisoria login-divisoria-empresa">
+        <img src="assets/linha.png" alt="" class="login-linha-img login-linha-empresa" />
+      </div>
+
+      <div id="login-form-empresa">
+        <div class="form-group">
+          <label for="login-usuario-emp">Usuário ou e-mail</label>
+          <input type="text" id="login-usuario-emp" name="loginUsuario"
+            placeholder="@sua_empresa ou contato@empresa.com" autocomplete="username" />
+        </div>
+        <div class="form-group" style="position:relative;">
+          <label for="login-senha-emp">Senha</label>
+          <input type="password" id="login-senha-emp" name="loginSenha"
+            placeholder="Digite sua senha" autocomplete="current-password" />
+          <button type="button" class="toggle-senha toggle-senha-empresa" data-target="login-senha-emp">mostrar</button>
+        </div>
+        <div style="text-align:right; margin-top:-6px; margin-bottom:20px;">
+          <a href="#" style="font-size:.8rem; color:var(--sky); font-weight:500;">Esqueci minha senha</a>
+        </div>
+        <div class="login-erro login-erro-empresa" id="erro-empresa"></div>
+        <button class="modal-submit modal-submit-empresa" id="btn-entrar-empresa">Entrar →</button>
+      </div>
+
+      <p class="modal-login-hint modal-login-hint-empresa">
+        Quer cadastrar sua empresa? <a href="#" style="color:var(--sky);">Fale conosco</a>
       </p>
     </div>
   </div>
 
   <script>
-    // ══════════════════════════════════════════════════════════
-    // Script unificado — navbar + modal cadastro + modal login
-    // ══════════════════════════════════════════════════════════
+    // ══════════════════════════════════════════════════════════════
+    // Script unificado — navbar + cadastro + login estudante/empresa
+    // ══════════════════════════════════════════════════════════════
 
-    // ── Referências ──
     const tabs            = document.querySelectorAll('.nav-tab');
     const btnLogin        = document.getElementById('nav-login');
     const btnCadastro     = document.getElementById('nav-cadastro');
     const overlayCadastro = document.getElementById('modal-cadastro-estudante');
-    const overlayLogin    = document.getElementById('modal-login');
-    const btnFechar       = document.getElementById('modal-close-btn');
-    const btnFecharLogin  = document.getElementById('modal-close-login');
+    const overlayLoginEst = document.getElementById('modal-login-estudante');
+    const overlayLoginEmp = document.getElementById('modal-login-empresa');
 
-    // ── Abas da navbar (efeito visual) ──
+    // ── Efeito visual nas abas da navbar ──
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
@@ -354,57 +375,62 @@
       this.value = v;
     });
 
-    // ════════════════════════════
-    // FUNÇÕES: Abrir / Fechar
-    // ════════════════════════════
+    // ══════════════════════════
+    // Abrir / fechar modais
+    // ══════════════════════════
+    function fecharTodos() {
+      [overlayCadastro, overlayLoginEst, overlayLoginEmp].forEach(o => o.classList.remove('active'));
+      document.body.style.overflow = '';
+    }
+
     function abrirCadastro() {
-      fecharLogin();
+      fecharTodos();
       overlayCadastro.classList.add('active');
       document.body.style.overflow = 'hidden';
       document.getElementById('cadastro-form').reset();
     }
-    function fecharCadastro() {
-      overlayCadastro.classList.remove('active');
-      document.body.style.overflow = '';
-    }
 
-    function abrirLogin() {
-      fecharCadastro();
-      // Reseta tudo ao abrir
-      document.getElementById('login-usuario').value        = '';
-      document.getElementById('login-senha').value          = '';
-      document.getElementById('login-senha').type           = 'password';
-      document.getElementById('toggle-senha-login').textContent = 'mostrar';
-      document.getElementById('login-erro').style.display   = 'none';
-      document.getElementById('login-form').style.display   = 'block';
-      document.getElementById('login-hint-cadastro').style.display = 'block';
-      // Reseta seletor para Estudante
-      document.querySelectorAll('.login-tipo-btn').forEach(b => b.classList.remove('active'));
-      document.querySelector('.login-tipo-estudante').classList.add('active');
-      perfilSelecionado = 'estudante';
-      atualizarBotaoEntrar('estudante');
-      overlayLogin.classList.add('active');
+    // Abre o login CORRETO conforme a aba ativa na navbar
+    function abrirLoginPorAba() {
+      const abaAtiva = document.querySelector('.nav-tab.active');
+      const tipo = abaAtiva ? abaAtiva.dataset.type : 'estudante';
+      fecharTodos();
+      if (tipo === 'empresa') {
+        overlayLoginEmp.classList.add('active');
+        resetarLoginEmpresa();
+      } else {
+        overlayLoginEst.classList.add('active');
+        resetarLoginEstudante();
+      }
       document.body.style.overflow = 'hidden';
     }
-    function fecharLogin() {
-      overlayLogin.classList.remove('active');
-      document.body.style.overflow = '';
+
+    function resetarLoginEstudante() {
+      document.getElementById('login-usuario-est').value = '';
+      document.getElementById('login-senha-est').value   = '';
+      document.getElementById('login-senha-est').type    = 'password';
+      document.querySelector('[data-target="login-senha-est"]').textContent = 'mostrar';
+      const erro = document.getElementById('erro-estudante');
+      erro.textContent = ''; erro.style.display = 'none';
     }
 
-    // Muda cor do botão "Entrar" conforme perfil
-    function atualizarBotaoEntrar(perfil) {
-      const btn = document.getElementById('btn-entrar-login');
-      btn.style.background = perfil === 'empresa' ? 'var(--navy)' : 'var(--orange)';
-      btn.style.boxShadow  = perfil === 'empresa'
-        ? '0 4px 14px rgba(28,43,58,.35)'
-        : '0 4px 14px rgba(212,116,58,.4)';
+    function resetarLoginEmpresa() {
+      document.getElementById('login-usuario-emp').value = '';
+      document.getElementById('login-senha-emp').value   = '';
+      document.getElementById('login-senha-emp').type    = 'password';
+      document.querySelector('[data-target="login-senha-emp"]').textContent = 'mostrar';
+      const erro = document.getElementById('erro-empresa');
+      erro.textContent = ''; erro.style.display = 'none';
     }
 
-    // ════════════════════════════
-    // EVENTOS: Botões da navbar
-    // ════════════════════════════
-    btnLogin.addEventListener('click', e => { e.preventDefault(); abrirLogin(); });
+    // ══════════════════════════════════
+    // Botões da navbar
+    // ══════════════════════════════════
 
+    // Login → abre modal correto conforme aba selecionada
+    btnLogin.addEventListener('click', e => { e.preventDefault(); abrirLoginPorAba(); });
+
+    // Cadastro → só estudante tem cadastro por enquanto
     btnCadastro.addEventListener('click', function (e) {
       const abaAtiva = document.querySelector('.nav-tab.active');
       if (abaAtiva && abaAtiva.dataset.type === 'estudante') {
@@ -413,77 +439,90 @@
       }
     });
 
-    // Fechar com X
-    btnFechar.addEventListener('click', fecharCadastro);
-    btnFecharLogin.addEventListener('click', fecharLogin);
+    // ── Fechar com X ──
+    document.getElementById('modal-close-btn').addEventListener('click', fecharTodos);
+    document.getElementById('fechar-login-estudante').addEventListener('click', fecharTodos);
+    document.getElementById('fechar-login-empresa').addEventListener('click', fecharTodos);
 
-    // Fechar ao clicar fora
-    overlayCadastro.addEventListener('click', e => { if (e.target === overlayCadastro) fecharCadastro(); });
-    overlayLogin.addEventListener('click',    e => { if (e.target === overlayLogin)    fecharLogin(); });
-
-    // Fechar com ESC
-    document.addEventListener('keydown', e => {
-      if (e.key === 'Escape') { fecharCadastro(); fecharLogin(); }
+    // ── Fechar ao clicar fora ──
+    [overlayCadastro, overlayLoginEst, overlayLoginEmp].forEach(overlay => {
+      overlay.addEventListener('click', e => { if (e.target === overlay) fecharTodos(); });
     });
 
-    // Links cruzados entre os dois modais
-    document.getElementById('link-abrir-login').addEventListener('click',    e => { e.preventDefault(); abrirLogin(); });
-    document.getElementById('link-abrir-cadastro').addEventListener('click', e => { e.preventDefault(); abrirCadastro(); });
+    // ── Fechar com ESC ──
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') fecharTodos(); });
 
-    // ════════════════════════════
-    // SELETOR DE PERFIL NO LOGIN
-    // ════════════════════════════
-    let perfilSelecionado = 'estudante';
+    // ── Link "Fazer login" dentro do cadastro → abre login do estudante ──
+    document.getElementById('link-abrir-login').addEventListener('click', e => {
+      e.preventDefault();
+      fecharTodos();
+      overlayLoginEst.classList.add('active');
+      document.body.style.overflow = 'hidden';
+      resetarLoginEstudante();
+    });
 
-    document.querySelectorAll('.login-tipo-btn').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.login-tipo-btn').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        perfilSelecionado = btn.dataset.perfil;
-        atualizarBotaoEntrar(perfilSelecionado);
-        document.getElementById('login-erro').style.display = 'none';
+    // ── Link "Criar conta" dentro do login estudante → abre cadastro ──
+    document.getElementById('link-cadastro-de-login').addEventListener('click', e => {
+      e.preventDefault(); abrirCadastro();
+    });
+
+    // ══════════════════════════════════════════════
+    // Mostrar / ocultar senha (funciona nos dois)
+    // ══════════════════════════════════════════════
+    document.querySelectorAll('.toggle-senha').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const input = document.getElementById(this.dataset.target);
+        if (input.type === 'password') { input.type = 'text';     this.textContent = 'ocultar'; }
+        else                           { input.type = 'password'; this.textContent = 'mostrar'; }
       });
     });
 
-    // Mostrar / ocultar senha
-    document.getElementById('toggle-senha-login').addEventListener('click', function () {
-      const input = document.getElementById('login-senha');
-      if (input.type === 'password') { input.type = 'text';     this.textContent = 'ocultar'; }
-      else                           { input.type = 'password'; this.textContent = 'mostrar'; }
-    });
+    // ══════════════════════════════════════════════════════════
+    // Submissão: Login Estudante → login_estudante.php via POST
+    // ══════════════════════════════════════════════════════════
+    document.getElementById('btn-entrar-estudante').addEventListener('click', function () {
+      const usuario = document.getElementById('login-usuario-est').value.trim();
+      const senha   = document.getElementById('login-senha-est').value;
+      const erro    = document.getElementById('erro-estudante');
 
-    // ════════════════════════════════════════════════════════
-    // LOGIN: envia para o PHP correto conforme perfil
-    // ════════════════════════════════════════════════════════
-    document.getElementById('btn-entrar-login').addEventListener('click', function () {
-      const usuario = document.getElementById('login-usuario').value.trim();
-      const senha   = document.getElementById('login-senha').value;
-      const erro    = document.getElementById('login-erro');
-
-      // Validação básica no front
       if (!usuario || !senha) {
-        erro.textContent   = 'Preencha o usuário/e-mail e a senha.';
-        erro.style.display = 'block';
-        return;
+        erro.textContent = 'Preencha o usuário/e-mail e a senha.';
+        erro.style.display = 'block'; return;
       }
-
-      // Cria um form dinâmico e submete via POST para o PHP correto
-      const destino = perfilSelecionado === 'estudante'
-        ? 'login_estudante.php'
-        : 'login_empresa.php';
+      erro.style.display = 'none';
 
       const form = document.createElement('form');
-      form.method = 'POST';
-      form.action = destino;
-
-      [['loginUsuario', usuario], ['loginSenha', senha], ['perfil', perfilSelecionado]].forEach(([name, value]) => {
-        const input = document.createElement('input');
-        input.type  = 'hidden';
-        input.name  = name;
-        input.value = value;
-        form.appendChild(input);
+      form.method = 'POST'; form.action = 'login_estudante.php';
+      [['loginUsuario', usuario], ['loginSenha', senha]].forEach(([n, v]) => {
+        const i = document.createElement('input');
+        i.type = 'hidden'; i.name = n; i.value = v;
+        form.appendChild(i);
       });
+      document.body.appendChild(form);
+      form.submit();
+    });
 
+    // ══════════════════════════════════════════════════════════
+    // Submissão: Login Empresa → login_empresa.php via POST
+    // ══════════════════════════════════════════════════════════
+    document.getElementById('btn-entrar-empresa').addEventListener('click', function () {
+      const usuario = document.getElementById('login-usuario-emp').value.trim();
+      const senha   = document.getElementById('login-senha-emp').value;
+      const erro    = document.getElementById('erro-empresa');
+
+      if (!usuario || !senha) {
+        erro.textContent = 'Preencha o usuário/e-mail e a senha.';
+        erro.style.display = 'block'; return;
+      }
+      erro.style.display = 'none';
+
+      const form = document.createElement('form');
+      form.method = 'POST'; form.action = 'login_empresa.php';
+      [['loginUsuario', usuario], ['loginSenha', senha]].forEach(([n, v]) => {
+        const i = document.createElement('input');
+        i.type = 'hidden'; i.name = n; i.value = v;
+        form.appendChild(i);
+      });
       document.body.appendChild(form);
       form.submit();
     });

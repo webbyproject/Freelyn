@@ -562,6 +562,95 @@
   color: var(--navy);
 }
 
+/* ════════════════════════════════════════════
+   Modais de Login — Estudante (laranja) e Empresa (azul)
+   ════════════════════════════════════════════ */
+
+/* Cabeçalho do modal de login */
+.login-header {
+  display: flex; align-items: center; gap: 16px;
+  padding: 20px 24px; border-radius: 12px;
+  margin-bottom: 4px;
+}
+.login-header-estudante {
+  background: linear-gradient(135deg, var(--orange), var(--terracota));
+}
+.login-header-empresa {
+  background: linear-gradient(135deg, var(--navy), #263e54);
+}
+.login-icone { font-size: 2rem; }
+.login-header-label {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: rgba(255,255,255,.65);
+  margin-bottom: 4px;
+}
+.login-header-titulo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.4rem; font-weight: 900;
+  color: var(--white); line-height: 1;
+}
+.login-header-titulo span { font-style: italic; }
+
+/* Divisória linha.png */
+.login-divisoria {
+  width: 100%; display: flex; align-items: center;
+  justify-content: center; margin: 14px 0 18px; overflow: hidden;
+}
+.login-linha-img {
+  width: 100%; max-width: 360px;
+  height: auto; opacity: .82; display: block;
+}
+/* Versão azulada da linha para empresa */
+.login-linha-empresa { filter: hue-rotate(180deg) saturate(.8); opacity: .55; }
+
+/* Botões de fechar coloridos */
+.modal-close-estudante:hover { background: var(--orange) !important; color: var(--white) !important; }
+.modal-close-empresa:hover   { background: var(--navy)   !important; color: var(--white) !important; }
+
+/* Botão Entrar — Estudante (laranja) */
+.modal-submit-estudante {
+  background: var(--orange) !important;
+  box-shadow: 0 4px 14px rgba(212,116,58,.4);
+}
+.modal-submit-estudante:hover {
+  background: var(--terracota) !important;
+}
+
+/* Botão Entrar — Empresa (azul) */
+.modal-submit-empresa {
+  background: var(--navy) !important;
+  box-shadow: 0 4px 14px rgba(28,43,58,.35);
+}
+.modal-submit-empresa:hover {
+  background: #263e54 !important;
+  box-shadow: 0 6px 20px rgba(28,43,58,.5);
+}
+
+/* Destaque azul nos inputs do modal empresa */
+.modal-empresa .form-group input:focus {
+  border-color: var(--sky) !important;
+  box-shadow: 0 0 0 3px rgba(139,184,212,.2) !important;
+}
+
+/* Mensagem de erro nos logins */
+.login-erro {
+  display: none;
+  background: #FDE9D9; border: 1.5px solid var(--orange);
+  border-radius: 8px; padding: 10px 14px; margin-bottom: 14px;
+  font-size: .84rem; color: var(--terracota);
+  font-weight: 600; text-align: center;
+}
+.login-erro-empresa {
+  background: #D9E4F0; border-color: var(--sky);
+  color: var(--navy);
+}
+
+/* Hint do modal empresa em azul */
+.modal-login-hint-empresa a { color: var(--sky) !important; }
+
+/* Botão mostrar/ocultar senha do modal empresa */
+.toggle-senha-empresa { color: var(--sky) !important; }
+
 .how-illustration {
     width: 520px;       /* Ajuste o tamanho conforme preferir */
     height: auto;
