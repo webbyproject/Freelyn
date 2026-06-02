@@ -1,6 +1,18 @@
 <?php
 session_start();
 
+// Para pegar os dados do formulário
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nome = $_POST["loginUsuarioEm"] ?? '';
+    $senha = $_POST["loginSenhaEm"] ?? '';
+}
+
+//Bloqueia outros acessos
+if ($nome !== "MinasFood" && $senha !== "minas123") {
+  $erro = "Dados incorretos";
+  header('Location: index.html'); exit;
+}
+
 // Simula sessão para teste sem banco de dados
 if (empty($_SESSION['logado'])) {
     $_SESSION['logado'] = true;
@@ -8,12 +20,10 @@ if (empty($_SESSION['logado'])) {
     $_SESSION['tipo']   = 'empresa';
 }
 
-if ($_SESSION['tipo'] !== 'empresa') {
-    header('Location: index.html'); exit;
-}
 
-$nomeEmpresa = $_SESSION['nome'];
-$primeiroNome = explode(' ', $nomeEmpresa)[0];
+
+$nomeEmpresa = $nome;
+
 
 // Vaga recém postada (simulado via POST)
 $vagaPostada = null;
@@ -200,7 +210,7 @@ $vagasPublicadas = [
     <a class="nav-logo" href="index.html"><img src="assets/logosj.png" alt="FreelynSJ"/></a>
     <div class="nav-user">
       <div class="nav-user-info">
-        <div class="nav-user-name"><?php echo htmlspecialchars($primeiroNome); ?></div>
+        <div class="nav-user-name"><?php echo htmlspecialchars($nomeEmpresa); ?></div>
         <div class="nav-user-role">Empresa</div>
       </div>
       <div class="nav-avatar">🏢</div>
@@ -212,7 +222,7 @@ $vagasPublicadas = [
   <div class="dash-hero">
     <div class="dash-hero-inner">
       <p class="dash-greeting">Painel da Empresa</p>
-      <h1>Olá, <em><?php echo htmlspecialchars($primeiroNome); ?></em>! 🏢</h1>
+      <h1>Olá, <em><?php echo htmlspecialchars($nomeEmpresa); ?></em>! 🏢</h1>
       <p>Publique vagas e encontre o freelancer certo para o seu negócio em São João del-Rei.</p>
       <div class="dash-stats">
         <div class="dash-stat">

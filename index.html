@@ -267,7 +267,7 @@
 
      
 
-      <form id="login-form-estudante">
+      <form id="login-form-estudante" action="dashboard_estudante.php" name="estud" method="POST">
         <div class="form-group">
           <label for="login-usuario-est">Usuário ou e-mail</label>
           <input type="text" id="login-usuario-est" name="loginUsuario"
@@ -311,15 +311,15 @@
       <!-- Divisória linha.png com tint azul -->
      
 
-      <form id="login-form-empresa">
+      <form id="login-form-empresa" action="dashboard_empresa.php" name="empresa" method="POST"> 
         <div class="form-group">
           <label for="login-usuario-emp">Usuário ou e-mail</label>
-          <input type="text" id="login-usuario-emp" name="loginUsuario"
+          <input type="text" id="login-usuario-emp" name="loginUsuarioEm"
             placeholder="@sua_empresa ou contato@empresa.com" autocomplete="username" />
         </div>
         <div class="form-group" style="position:relative;">
           <label for="login-senha-emp">Senha</label>
-          <input type="password" id="login-senha-emp" name="loginSenha"
+          <input type="password" id="login-senha-emp" name="loginSenhaEm"
             placeholder="Digite sua senha" autocomplete="current-password" />
           <button type="button" class="toggle-senha toggle-senha-empresa" data-target="login-senha-emp">mostrar</button>
         </div>

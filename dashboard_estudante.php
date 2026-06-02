@@ -1,6 +1,16 @@
 <?php
 session_start();
 
+// Para pegar os dados do formulário
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
+    $nome = $_POST["loginUsuario"] ?? '';
+    $senha = $_POST["loginSenha"] ?? '';
+}
+
+if ($nome !== "Maria" && $senha !== "123456") {
+  $erro = "Dados incorretos";
+  header('Location: index.html'); exit;
+}  
 // Simula sessão para teste sem banco de dados
 if (empty($_SESSION['logado'])) {
     // Para testar sem login, cria uma sessão fake
@@ -9,11 +19,6 @@ if (empty($_SESSION['logado'])) {
     $_SESSION['tipo']   = 'estudante';
 }
 
-if ($_SESSION['tipo'] !== 'estudante') {
-    header('Location: index.html'); exit;
-}
-
-$nome = $_SESSION['nome'];
 $primeiroNome = explode(' ', $nome)[0];
 
 // Vagas simuladas (sem banco de dados)
@@ -269,7 +274,7 @@ $vagas = [
         <div class="nav-user-role">Freelancer</div>
       </div>
       <div class="nav-avatar"><?php echo strtoupper(substr($primeiroNome, 0, 1)); ?></div>
-      <a href="logout.php" class="btn-logout">Sair</a>
+      <a href="logout.php" class="btn-logout">Sair</a> 
     </div>
   </nav>
 
