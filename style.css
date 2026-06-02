@@ -655,6 +655,18 @@
 /* Botão mostrar/ocultar senha do modal empresa */
 .toggle-senha-empresa { color: var(--sky) !important; }
 
+/* Tag azul do modal de cadastro empresa */
+.modal-tag-empresa {
+  background: #D9E4F0 !important;
+  color: var(--navy) !important;
+}
+
+/* Divisória azul */
+.form-divider-empresa {
+  background: var(--sky) !important;
+  opacity: .4;
+}
+
 .how-illustration {
     width: 520px;       /* Ajuste o tamanho conforme preferir */
     height: auto;
