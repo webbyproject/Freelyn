@@ -578,13 +578,13 @@
 .login-icone { font-size: 2rem; }
 .login-header-label {
   font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--orange);
+  text-transform: uppercase; color: var(--cream);
   margin-bottom: 4px;
 }
 
 .login-header-label02 {
   font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--muted);
+  text-transform: uppercase; color: var(--cream);
   margin-bottom: 4px;
 }
 
@@ -668,5 +668,14 @@
   background-color: var(--navy);
   width: 40%;
   border-radius: 5px;
+ 
+}
+
+.divareaest{
+  text-align: center;
+  background-color: var(--orange);
+  width: 50%;
+  border-radius: 5px;
+  justify-content: c;
  
 }
