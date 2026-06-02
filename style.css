@@ -574,13 +574,20 @@
 }
 
 
-
+}
 .login-icone { font-size: 2rem; }
 .login-header-label {
   font-size: .68rem; font-weight: 700; letter-spacing: .12em;
   text-transform: uppercase; color: var(--orange);
   margin-bottom: 4px;
 }
+
+.login-header-label02 {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--muted);
+  margin-bottom: 4px;
+}
+
 .login-header-titulo {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem; font-weight: 900;
@@ -654,4 +661,11 @@
     margin-bottom: 20px; /* Espaço entre a imagem e o número 01 */
     display: block;      /* Garante que ela ocupe uma linha própria */
 
+}
+
+.divareaem{
+  text-align: center;
+  background-color: var(--navy);
+  width: 40%;
+  border-radius: 5px;
 }
