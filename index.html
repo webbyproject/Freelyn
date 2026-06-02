@@ -401,6 +401,17 @@
       tab.addEventListener('click', () => {
         tabs.forEach(t => t.classList.remove('active'));
         tab.classList.add('active');
+
+        // Muda cor do botão Cadastro conforme perfil selecionado
+        const tipo = tab.dataset.type;
+        if (tipo === 'empresa') {
+          btnCadastro.style.background = 'var(--navy)';
+          btnCadastro.style.boxShadow  = '0 4px 14px rgba(28,43,58,.35)';
+        } else {
+          btnCadastro.style.background = 'var(--orange)';
+          btnCadastro.style.boxShadow  = '0 4px 14px rgba(212,116,58,.35)';
+        }
+
         [btnLogin, btnCadastro].forEach(btn => {
           btn.style.transform = 'scale(1.07)';
           setTimeout(() => { btn.style.transform = ''; }, 180);

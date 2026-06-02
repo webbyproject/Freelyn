@@ -86,6 +86,7 @@
     .btn-orange {
       background: var(--orange); color: var(--white);
       padding: 9px 22px; font-size: .88rem; border: none;
+      transition: background .25s, box-shadow .25s, transform .2s;
     }
     .btn-orange:hover { background: var(--terracota); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,116,58,.45); }
 
@@ -578,13 +579,15 @@
 .login-icone { font-size: 2rem; }
 .login-header-label {
   font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--cream);
+  text-transform: uppercase;
+  color: rgba(255,255,255,.85); /* branco suave sobre fundo laranja */
   margin-bottom: 4px;
 }
 
 .login-header-label02 {
   font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--cream);
+  text-transform: uppercase;
+  color: var(--sky); /* azul claro sobre fundo navy */
   margin-bottom: 4px;
 }
 
