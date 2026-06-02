@@ -68,6 +68,12 @@
       box-shadow: 0 2px 8px rgba(212,116,58,.4);
     }
 
+    .nav-tab.active2 {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(212,116,58,.4);
+    }
+
     /* ── Botões de Ação (Login e Cadastro) ── */
     .nav-auth { display: flex; gap: 8px; align-items: center; }
     .btn {
