@@ -68,6 +68,12 @@
       box-shadow: 0 2px 8px rgba(212,116,58,.4);
     }
 
+    .nav-tab.active2 {
+      background: var(--navy);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(212,116,58,.4);
+    }
+
     /* ── Botões de Ação (Login e Cadastro) ── */
     .nav-auth { display: flex; gap: 8px; align-items: center; }
     .btn {
@@ -86,6 +92,7 @@
     .btn-orange {
       background: var(--orange); color: var(--white);
       padding: 9px 22px; font-size: .88rem; border: none;
+      transition: background .25s, box-shadow .25s, transform .2s;
     }
     .btn-orange:hover { background: var(--terracota); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(212,116,58,.45); }
 
@@ -574,13 +581,22 @@
 }
 
 
-
+}
 .login-icone { font-size: 2rem; }
 .login-header-label {
   font-size: .68rem; font-weight: 700; letter-spacing: .12em;
-  text-transform: uppercase; color: var(--orange);
+  text-transform: uppercase;
+  color: rgba(255,255,255,.85); /* branco suave sobre fundo laranja */
   margin-bottom: 4px;
 }
+
+.login-header-label02 {
+  font-size: .68rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--sky); /* azul claro sobre fundo navy */
+  margin-bottom: 4px;
+}
+
 .login-header-titulo {
   font-family: 'Playfair Display', serif;
   font-size: 1.4rem; font-weight: 900;
@@ -648,10 +664,39 @@
 /* Botão mostrar/ocultar senha do modal empresa */
 .toggle-senha-empresa { color: var(--sky) !important; }
 
+/* Tag azul do modal de cadastro empresa */
+.modal-tag-empresa {
+  background: #D9E4F0 !important;
+  color: var(--navy) !important;
+}
+
+/* Divisória azul */
+.form-divider-empresa {
+  background: var(--sky) !important;
+  opacity: .4;
+}
+
 .how-illustration {
     width: 520px;       /* Ajuste o tamanho conforme preferir */
     height: auto;
     margin-bottom: 20px; /* Espaço entre a imagem e o número 01 */
     display: block;      /* Garante que ela ocupe uma linha própria */
 
+}
+
+.divareaem{
+  text-align: center;
+  background-color: var(--navy);
+  width: 40%;
+  border-radius: 5px;
+ 
+}
+
+.divareaest{
+  text-align: center;
+  background-color: var(--orange);
+  width: 50%;
+  border-radius: 5px;
+  justify-content: c;
+ 
 }
