@@ -7,10 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha = $_POST["loginSenha"] ?? '';
 }
 
-if ($nome !== "Maria" && $senha !== "123456") {
-  $erro = "Dados incorretos";
-  header('Location: index.html'); exit;
-}  
 // Simula sessão para teste sem banco de dados
 if (empty($_SESSION['logado'])) {
     // Para testar sem login, cria uma sessão fake

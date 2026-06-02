@@ -7,11 +7,6 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $senha = $_POST["loginSenhaEm"] ?? '';
 }
 
-//Bloqueia outros acessos
-if ($nome !== "MinasFood" && $senha !== "minas123") {
-  $erro = "Dados incorretos";
-  header('Location: index.html'); exit;
-}
 
 // Simula sessão para teste sem banco de dados
 if (empty($_SESSION['logado'])) {
@@ -29,25 +24,7 @@ $nomeEmpresa = $nome;
 $vagaPostada = null;
 $erroVaga = null;
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $titulo    = trim($_POST['titulo']    ?? '');
-    $descricao = trim($_POST['descricao'] ?? '');
-    $salario   = trim($_POST['salario']   ?? '');
-    $horario   = trim($_POST['horario']   ?? '');
-    $categoria = trim($_POST['categoria'] ?? '');
 
-    if (empty($titulo) || empty($descricao) || empty($salario) || empty($horario) || empty($categoria)) {
-        $erroVaga = "Preencha todos os campos para publicar a vaga.";
-    } else {
-        $vagaPostada = [
-            'titulo'    => $titulo,
-            'descricao' => $descricao,
-            'salario'   => $salario,
-            'horario'   => $horario,
-            'categoria' => $categoria,
-        ];
-    }
-}
 
 // Vagas simuladas já publicadas
 $vagasPublicadas = [
@@ -263,7 +240,7 @@ $vagasPublicadas = [
           </div>
         <?php endif; ?>
 
-        <form method="POST" action="dashboard_empresa.php">
+        <form method="POST" >
           <div class="form-group">
             <label for="titulo">Título da vaga</label>
             <input type="text" id="titulo" name="titulo" placeholder="Ex.: Garçom para Evento" required/>
@@ -305,6 +282,25 @@ $vagasPublicadas = [
       </div>
     </div>
 
+    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+      $titulo    = trim($_POST['titulo']    ?? '');
+      $descricao = trim($_POST['descricao'] ?? '');
+      $salario   = trim($_POST['salario']   ?? '');
+      $horario   = trim($_POST['horario']   ?? '');
+      $categoria = trim($_POST['categoria'] ?? '');
+
+      if (empty($titulo) || empty($descricao) || empty($salario) || empty($horario) || empty($categoria)) {
+          $erroVaga = "Preencha todos os campos para publicar a vaga.";
+      } else {
+          $vagaPostada = [
+              'titulo'    => $titulo,
+              'descricao' => $descricao,
+              'salario'   => $salario,
+              'horario'   => $horario,
+              'categoria' => $categoria,
+          ];
+      }
+  }?>
     <!-- Coluna direita: vagas publicadas -->
     <div class="vagas-publicadas">
       <p class="dash-section-title">Suas vagas publicadas</p>

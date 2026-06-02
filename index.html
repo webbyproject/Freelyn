@@ -472,7 +472,7 @@
     });
 
     // ══════════════════════════════════════════════════════════
-    // Submissão: Login Estudante → login_estudante.php via POST
+    // Submissão: Login Estudante → dashboard_estudante.php via POST
     // ══════════════════════════════════════════════════════════
     document.getElementById('btn-entrar-estudante').addEventListener('click', function () {
       const usuario = document.getElementById('login-usuario-est').value.trim();
@@ -482,9 +482,13 @@
       if (!usuario || !senha) {
         erro.textContent = 'Preencha o usuário/e-mail e a senha.';
         erro.style.display = 'block'; return;
+      
+      } else if (usuario !== "Maria" || senha !== "123456" ) {
+        erro.textContent = 'Dados Incorretos!';
+        erro.style.display = 'block'; return;
       }
       erro.style.display = 'none';
-
+      
       const form = document.createElement('form');
       form.method = 'POST'; form.action = 'login_estudante.php';
       [['loginUsuario', usuario], ['loginSenha', senha]].forEach(([n, v]) => {
@@ -497,7 +501,7 @@
     });
 
     // ══════════════════════════════════════════════════════════
-    // Submissão: Login Empresa → login_empresa.php via POST
+    // Submissão: Login Empresa → dashboard_empresa.php via POST
     // ══════════════════════════════════════════════════════════
     document.getElementById('btn-entrar-empresa').addEventListener('click', function () {
       const usuario = document.getElementById('login-usuario-emp').value.trim();
@@ -507,9 +511,13 @@
       if (!usuario || !senha) {
         erro.textContent = 'Preencha o usuário/e-mail e a senha.';
         erro.style.display = 'block'; return;
+      
+      } else if (usuario !== "MinasFood" || senha !== "123456" ) {
+        erro.textContent = 'Dados Incorretos!';
+        erro.style.display = 'block'; return;
       }
       erro.style.display = 'none';
-
+      
       const form = document.createElement('form');
       form.method = 'POST'; form.action = 'login_empresa.php';
       [['loginUsuario', usuario], ['loginSenha', senha]].forEach(([n, v]) => {
