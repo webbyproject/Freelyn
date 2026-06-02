@@ -23,7 +23,7 @@ $vagas = [
     ['id'=>2, 'titulo'=>'Designer de Posts',         'empresa'=>'Moda Mineira Boutique',  'salario'=>'R$ 300,00',  'horario'=>'Flexível',         'categoria'=>'Ilustração Digital',   'local'=>'Remoto'],
     ['id'=>3, 'titulo'=>'Fotógrafo de Casamento',    'empresa'=>'Studio Luz & Cia',       'salario'=>'R$ 500,00',  'horario'=>'Dom, dia inteiro', 'categoria'=>'Fotografia',           'local'=>'São João del-Rei'],
     ['id'=>4, 'titulo'=>'Editor de Vídeo',           'empresa'=>'Agência Click Digital',  'salario'=>'R$ 250,00',  'horario'=>'Flexível',         'categoria'=>'Edição de Vídeo',      'local'=>'Remoto'],
-    ['id'=>5, 'titulo'=>'Músico para Bar',           'empresa'=>'Bar do Zé Mineiro',      'salario'=>'R$ 200,00',  'horario'=>'Sex, 20h–00h',     'categoria'=>'Música & Eventos',     'local'=>'Tiradentes'],
+    ['id'=>5, 'titulo'=>'Músico para Bar',           'empresa'=>'Rustic PUB',      'salario'=>'R$ 200,00',  'horario'=>'Sex, 20h–00h',     'categoria'=>'Música & Eventos',     'local'=>'Tiradentes'],
     ['id'=>6, 'titulo'=>'Redator de Blog',           'empresa'=>'Portal SJdR Notícias',   'salario'=>'R$ 180,00',  'horario'=>'Flexível',         'categoria'=>'Redação',              'local'=>'Remoto'],
 ];
 ?>
