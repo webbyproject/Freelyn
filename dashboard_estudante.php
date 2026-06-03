@@ -270,7 +270,7 @@ $vagas = [
     /* ── Toast de confirmação ── */
     .toast {
       position: fixed; bottom: 28px; right: 28px; z-index: 999;
-      background: var(--navy); color: var(--white);
+      background: var(--sky); color: var(--white);
       padding: 14px 24px; border-radius: 12px;
       font-size: .9rem; font-weight: 600;
       box-shadow: 0 8px 32px rgba(28,43,58,.3);
