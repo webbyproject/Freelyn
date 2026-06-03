@@ -17,11 +17,11 @@ $primeiroNome = !empty($partesNome[0]) ? $partesNome[0] : 'Usuário';
 
 // Vagas simuladas (sem banco de dados)
 $vagas = [
-    ['id'=>1, 'titulo'=>'Garçom para Evento',       'empresa'=>'Buffet Sabor & Arte',    'salario'=>'R$ 150,00',  'horario'=>'Sáb, 18h–23h',    'categoria'=>'Bares & Restaurantes', 'local'=>'Centro, SJdR'],
-    ['id'=>2, 'titulo'=>'Designer de Posts',         'empresa'=>'Moda Mineira Boutique',  'salario'=>'R$ 300,00',  'horario'=>'Flexível',         'categoria'=>'Ilustração Digital',   'local'=>'Remoto'],
-    ['id'=>3, 'titulo'=>'Fotógrafo de Casamento',    'empresa'=>'Studio Luz & Cia',       'salario'=>'R$ 500,00',  'horario'=>'Dom, dia inteiro', 'categoria'=>'Fotografia',           'local'=>'São João del-Rei'],
+    ['id'=>1, 'titulo'=>'Garçom para Evento',       'empresa'=>'Buffet Sabor & Arte',    'salario'=>'R$ 150,00',  'horario'=>'Sáb, 18h–23h',    'categoria'=>'Bares & Restaurantes', 'local'=>'Centro, SJDR'],
+    ['id'=>5, 'titulo'=>'Músico para Bar',           'empresa'=>'Rustic PUB',      'salario'=>'R$ 200,00',  'horario'=>'Sex, 19h–00h',     'categoria'=>'Música & Eventos',     'local'=>'Centro, SJDR'],
+    ['id'=>3, 'titulo'=>'Fotógrafo de Casamento',    'empresa'=>'Studio Luz & Cia',       'salario'=>'R$ 500,00',  'horario'=>'Dom, dia inteiro', 'categoria'=>'Fotografia',           'local'=>'Tiradentes'],
     ['id'=>4, 'titulo'=>'Editor de Vídeo',           'empresa'=>'Agência Click Digital',  'salario'=>'R$ 250,00',  'horario'=>'Flexível',         'categoria'=>'Edição de Vídeo',      'local'=>'Remoto'],
-    ['id'=>5, 'titulo'=>'Músico para Bar',           'empresa'=>'Rustic PUB',      'salario'=>'R$ 200,00',  'horario'=>'Sex, 20h–00h',     'categoria'=>'Música & Eventos',     'local'=>'Tiradentes'],
+    ['id'=>2, 'titulo'=>'Designer de Posts',         'empresa'=>'Moda Mineira Boutique',  'salario'=>'R$ 300,00',  'horario'=>'Flexível',         'categoria'=>'Ilustração Digital',   'local'=>'Remoto'],
     ['id'=>6, 'titulo'=>'Redator de Blog',           'empresa'=>'Portal SJdR Notícias',   'salario'=>'R$ 180,00',  'horario'=>'Flexível',         'categoria'=>'Redação',              'local'=>'Remoto'],
 ];
 ?>
@@ -35,6 +35,7 @@ $vagas = [
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="style.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
   <style>
     /* ── Dashboard Layout ── */
     .dashboard-wrapper {
@@ -99,6 +100,8 @@ $vagas = [
       flex-direction: column;
       gap: 24px;
     }
+
+    
 
     /* Saudação Integrada */
     .dash-sidebar-welcome {
@@ -322,11 +325,21 @@ $vagas = [
       <div class="filter-box">
         <span class="filter-box-title">Filtrar por Categoria</span>
         <div class="filter-chips-vertical">
-          <button class="filter-chip active" onclick="filtrar(this, 'todas')">Todas as vagas</button>
-          <button class="filter-chip" onclick="filtrar(this, 'Remoto')">🌐 Trabalho Remoto</button>
-          <button class="filter-chip" onclick="filtrar(this, 'Fotografia')">📸 Fotografia</button>
-          <button class="filter-chip" onclick="filtrar(this, 'Música & Eventos')">🎵 Música & Shows</button>
-          <button class="filter-chip" onclick="filtrar(this, 'Bares & Restaurantes')">🍔 Gastronomia</button>
+          <button class="filter-chip active" onclick="filtrar(this, 'todas')">
+            <i class="fas fa-layer-group"></i> Todas as vagas
+          </button>
+          <button class="filter-chip" onclick="filtrar(this, 'Remoto')">
+            <i class="fas fa-house-laptop"></i> Trabalho Remoto
+          </button>
+          <button class="filter-chip" onclick="filtrar(this, 'Fotografia')">
+            <i class="fas fa-camera"></i> Fotografia
+          </button>
+          <button class="filter-chip" onclick="filtrar(this, 'Música & Eventos')">
+            <i class="fas fa-music"></i> Música & Shows
+          </button>
+          <button class="filter-chip" onclick="filtrar(this, 'Bares & Restaurantes')">
+            <i class="fas fa-utensils"></i> Gastronomia
+          </button>
         </div>
       </div>
 
