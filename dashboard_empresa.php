@@ -195,30 +195,7 @@ $vagasPublicadas = [
     </div>
   </nav>
 
-  <!-- Hero -->
-  <div class="dash-hero">
-    <div class="dash-hero-inner">
-      <p class="dash-greeting">Painel da Empresa</p>
-      <h1>Olá, <em><?php echo htmlspecialchars($nomeEmpresa); ?></em>! 🏢</h1>
-      <p>Publique vagas e encontre o freelancer certo para o seu negócio em São João del-Rei.</p>
-      <div class="dash-stats">
-        <div class="dash-stat">
-          <div class="dash-stat-icon">📋</div>
-          <div>
-            <div class="dash-stat-num"><?php echo count($vagasPublicadas) + ($vagaPostada ? 1 : 0); ?></div>
-            <div class="dash-stat-label">Vagas publicadas</div>
-          </div>
-        </div>
-        <div class="dash-stat">
-          <div class="dash-stat-icon">👥</div>
-          <div>
-            <div class="dash-stat-num"><?php echo array_sum(array_column($vagasPublicadas, 'candidatos')); ?></div>
-            <div class="dash-stat-label">Candidatos recebidos</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+
 
   <!-- Conteúdo: 2 colunas -->
   <div class="dash-content">
