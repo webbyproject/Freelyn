@@ -1,21 +1,19 @@
 <?php
 session_start();
 
-// Para pegar os dados do formulário
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nome = $_POST["loginUsuario"] ?? '';
-    $senha = $_POST["loginSenha"] ?? '';
-}
-
-// Simula sessão para teste sem banco de dados
+// Simula sessão para teste sem banco de dados caso não exista nada na Session
 if (empty($_SESSION['logado'])) {
-    // Para testar sem login, cria uma sessão fake
     $_SESSION['logado'] = true;
     $_SESSION['nome']   = 'Maria Silva';
     $_SESSION['tipo']   = 'estudante';
 }
 
-$primeiroNome = explode(' ', $nome)[0];
+// Para pegar os dados do formulário POST ou herdar da sessão simulada
+$nomeCompleto = $_POST["loginUsuario"] ?? $_SESSION['nome'] ?? 'Usuário';
+
+// Divide o nome com segurança
+$partesNome = explode(' ', trim($nomeCompleto));
+$primeiroNome = !empty($partesNome[0]) ? $partesNome[0] : 'Usuário';
 
 // Vagas simuladas (sem banco de dados)
 $vagas = [
@@ -77,106 +75,126 @@ $vagas = [
     }
     .btn-logout:hover { background: rgba(255,255,255,.22); }
 
-    /* ── Hero do dashboard ── */
-    .dash-hero {
-      background: linear-gradient(135deg, var(--navy) 0%, #263e54 100%);
-      padding: 48px 5% 56px;
-      position: relative; overflow: hidden;
-    }
-    .dash-hero::before {
-      content: '';
-      position: absolute; top: -60px; right: -60px;
-      width: 300px; height: 300px;
-      background: var(--orange); opacity: .07;
-      border-radius: 50%;
-    }
-    .dash-hero::after {
-      content: '';
-      position: absolute; bottom: -80px; left: 30%;
-      width: 200px; height: 200px;
-      background: var(--sky); opacity: .05;
-      border-radius: 50%;
-    }
-    .dash-hero-inner {
-      max-width: 1200px; margin: 0 auto;
-      position: relative; z-index: 1;
-    }
-    .dash-greeting {
-      font-size: .75rem; font-weight: 700; letter-spacing: .14em;
-      text-transform: uppercase; color: var(--orange);
-      margin-bottom: 8px;
-    }
-    .dash-hero h1 {
-      font-family: 'Playfair Display', serif;
-      font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-      font-weight: 900; color: var(--white);
-      margin-bottom: 10px; line-height: 1.15;
-    }
-    .dash-hero h1 em { color: var(--orange); font-style: normal; }
-    .dash-hero p {
-      color: rgba(255,255,255,.6); font-size: .95rem;
-      max-width: 480px; line-height: 1.6;
+    /* ── Estrutura em Duas Colunas (Com espaçamento superior ajustado) ── */
+    .dash-main-layout {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 50px 5%;
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 40px;
     }
 
-    /* ── Stats mini ── */
-    .dash-stats {
-      display: flex; gap: 20px; margin-top: 32px; flex-wrap: wrap;
+    @media (max-width: 900px) {
+      .dash-main-layout {
+        grid-template-columns: 1fr;
+        gap: 30px;
+        padding-top: 30px;
+      }
     }
-    .dash-stat {
-      background: rgba(255,255,255,.07);
-      border: 1px solid rgba(255,255,255,.1);
-      border-radius: 10px; padding: 14px 22px;
-      display: flex; align-items: center; gap: 12px;
+
+    /* ── Barra Lateral (Sidebar) ── */
+    .dash-sidebar {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
     }
-    .dash-stat-icon { font-size: 1.4rem; }
+
+    /* Saudação Integrada */
+    .dash-sidebar-welcome {
+      margin-bottom: 4px;
+    }
+    .dash-sidebar-welcome .greeting-tag {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--orange);
+      display: block; margin-bottom: 2px;
+    }
+    .dash-sidebar-welcome h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.8rem; font-weight: 900; color: var(--navy);
+      margin: 0; line-height: 1.2;
+    }
+    .dash-sidebar-welcome h1 em { color: var(--orange); font-style: normal; }
+
+    /* Card de Estatística Estilizado */
+    .dash-stat-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 20px;
+      box-shadow: 0 4px 20px rgba(28,43,58,.03);
+      border: 1px solid var(--sand);
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .dash-stat-icon-wrapper {
+      width: 42px; height: 42px;
+      background: var(--orange);
+      border-radius: 8px;
+      display: flex; align-items: center; justify-content: center;
+    }
     .dash-stat-num {
       font-family: 'Playfair Display', serif;
-      font-size: 1.4rem; font-weight: 700; color: var(--orange);
-      line-height: 1;
+      font-size: 1.6rem; font-weight: 900; color: var(--navy);
+      line-height: 1.1;
     }
-    .dash-stat-label { font-size: .72rem; color: rgba(255,255,255,.5); margin-top: 2px; }
-
-    /* ── Conteúdo principal ── */
-    .dash-content {
-      max-width: 1200px; margin: 0 auto;
-      padding: 40px 5%;
+    .dash-stat-label { 
+      font-size: .78rem; 
+      color: var(--muted); 
+      font-weight: 500;
     }
 
-    /* ── Filtros ── */
-    .dash-filters {
-      display: flex; gap: 10px; flex-wrap: wrap;
-      margin-bottom: 32px; align-items: center;
+    /* Caixa do Filtro Vertical */
+    .filter-box {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(28,43,58,.03);
+      border: 1px solid var(--sand);
     }
-    .dash-filters-label {
-      font-size: .78rem; font-weight: 700; color: var(--muted);
+    .filter-box-title {
+      font-size: .75rem; font-weight: 700; color: var(--navy);
       text-transform: uppercase; letter-spacing: .08em;
-      margin-right: 4px;
+      margin-bottom: 14px; display: block;
+    }
+    .filter-chips-vertical {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
     }
     .filter-chip {
-      background: var(--white); border: 1.5px solid var(--sand);
-      border-radius: 20px; padding: 6px 16px;
-      font-size: .8rem; font-weight: 600; color: var(--muted);
+      background: var(--cream); 
+      border: 1px solid transparent;
+      border-radius: 8px; 
+      padding: 10px 14px;
+      font-size: .85rem; font-weight: 600; color: var(--text);
       cursor: pointer; transition: all .2s;
+      text-align: left;
     }
     .filter-chip:hover, .filter-chip.active {
-      background: var(--orange); border-color: var(--orange);
+      background: var(--orange);
       color: var(--white);
     }
 
-    /* ── Seção título ── */
+    /* ── Conteúdo da Listagem ── */
+    .dash-section-header {
+      margin-bottom: 28px;
+      border-bottom: 1px solid var(--sand);
+      padding-bottom: 16px;
+    }
     .dash-section-title {
       font-family: 'Playfair Display', serif;
-      font-size: 1.5rem; font-weight: 700; color: var(--navy);
+      font-size: 1.8rem; font-weight: 700; color: var(--navy);
       margin-bottom: 6px;
     }
     .dash-section-sub {
-      font-size: .88rem; color: var(--muted); margin-bottom: 28px;
+      font-size: .9rem; color: var(--muted);
     }
 
     /* ── Grid de vagas ── */
     .vagas-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
       gap: 20px;
     }
 
@@ -184,59 +202,62 @@ $vagas = [
     .vaga-card {
       background: var(--white);
       border-radius: 14px;
-      padding: 28px;
-      box-shadow: 0 4px 20px rgba(28,43,58,.08);
+      padding: 24px;
+      box-shadow: 0 4px 20px rgba(28,43,58,.04);
       border: 1.5px solid transparent;
       transition: all .25s;
-      display: flex; flex-direction: column; gap: 0;
+      display: flex; flex-direction: column;
     }
     .vaga-card:hover {
       transform: translateY(-3px);
-      box-shadow: 0 12px 36px rgba(28,43,58,.14);
+      box-shadow: 0 12px 36px rgba(28,43,58,.08);
       border-color: var(--orange);
     }
     .vaga-categoria {
-      display: inline-block;
-      font-size: .68rem; font-weight: 700; letter-spacing: .1em;
-      text-transform: uppercase; padding: 3px 10px; border-radius: 4px;
+      align-self: flex-start;
+      font-size: .65rem; font-weight: 700; letter-spacing: .08em;
+      text-transform: uppercase; padding: 4px 10px; border-radius: 6px;
       background: #FDE9D9; color: var(--orange);
-      margin-bottom: 12px;
+      margin-bottom: 14px;
     }
     .vaga-titulo {
       font-family: 'Playfair Display', serif;
-      font-size: 1.15rem; font-weight: 700; color: var(--navy);
-      margin-bottom: 4px; line-height: 1.3;
+      font-size: 1.2rem; font-weight: 700; color: var(--navy);
+      margin-bottom: 6px; line-height: 1.3;
     }
     .vaga-empresa {
       font-size: .85rem; color: var(--muted); font-weight: 500;
       margin-bottom: 16px;
     }
     .vaga-detalhes {
-      display: flex; gap: 16px; flex-wrap: wrap;
-      margin-bottom: 20px;
+      display: flex; flex-direction: column; gap: 6px;
+      margin-bottom: 20px; border-top: 1px solid var(--cream); padding-top: 12px;
     }
     .vaga-detalhe {
-      display: flex; align-items: center; gap: 5px;
+      display: flex; align-items: center; gap: 8px;
       font-size: .8rem; color: var(--text); font-weight: 500;
     }
-    .vaga-detalhe-icon { font-size: .9rem; }
+    .vaga-detalhe-icon { font-size: .9rem; opacity: 0.8; }
+    
+    .vaga-footer {
+      margin-top: auto;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px; padding-top: 12px;
+    }
     .vaga-salario {
       font-family: 'Playfair Display', serif;
-      font-size: 1.3rem; font-weight: 700; color: var(--orange);
-      margin-bottom: 16px;
+      font-size: 1.25rem; font-weight: 700; color: var(--orange);
     }
     .btn-candidatar {
-      width: 100%;
       background: var(--navy); color: var(--white);
-      border: none; border-radius: 10px;
-      padding: 12px; font-family: 'DM Sans', sans-serif;
-      font-size: .9rem; font-weight: 700; cursor: pointer;
-      transition: all .2s; margin-top: auto;
+      border: none; border-radius: 8px;
+      padding: 10px 16px; font-family: 'DM Sans', sans-serif;
+      font-size: .85rem; font-weight: 700; cursor: pointer;
+      transition: all .2s;
     }
     .btn-candidatar:hover {
       background: var(--orange);
-      transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(212,116,58,.35);
+      box-shadow: 0 4px 12px rgba(212,116,58,.2);
     }
     .btn-candidatar.aplicado {
       background: #e8f5e9; color: #2e7d32;
@@ -274,72 +295,73 @@ $vagas = [
     </div>
   </nav>
 
-  <!-- Hero do dashboard -->
-  <div class="dash-hero">
-    <div class="dash-hero-inner">
-      <p class="dash-greeting">Painel do Freelancer</p>
-      <h1>Olá, <em><?php echo htmlspecialchars($primeiroNome); ?></em>! 👋</h1>
-      <p>Encontre oportunidades em São João del-Rei e região. Candidate-se com um clique.</p>
-      <div class="dash-stats">
-        <div class="dash-stat">
-          <div class="dash-stat-icon">💼</div>
-          <div>
-            <div class="dash-stat-num"><?php echo count($vagas); ?></div>
-            <div class="dash-stat-label">Vagas disponíveis</div>
-          </div>
+  <!-- Estrutura Principal Dividida (Sem a Hero antiga) -->
+  <div class="dash-main-layout">
+    
+    <!-- Esquerda: Saudação, Informações e Filtros -->
+    <aside class="dash-sidebar">
+      
+      <!-- Bloco de Boas-vindas Mesclado -->
+      <div class="dash-sidebar-welcome">
+        <span class="greeting-tag">Painel de Vagas</span>
+        <h1>Olá, <em><?php echo htmlspecialchars($primeiroNome); ?></em>!</h1>
+      </div>
+      
+      <!-- Card Vagas Disponíveis -->
+      <div class="dash-stat-card">
+        <div class="dash-stat-icon-wrapper">
+          <img src="assets/briefcase.png" width="20" alt="Vagas"/>
         </div>
-        <div class="dash-stat">
-          <div class="dash-stat-icon">📍</div>
-          <div>
-            <div class="dash-stat-num">SJdR</div>
-            <div class="dash-stat-label">Sua região</div>
-          </div>
-        </div>
-        <div class="dash-stat">
-          <div class="dash-stat-icon">⭐</div>
-          <div>
-            <div class="dash-stat-num">100%</div>
-            <div class="dash-stat-label">Gratuito</div>
-          </div>
+        <div>
+          <div class="dash-stat-num" id="count-vagas"><?php echo count($vagas); ?></div>
+          <div class="dash-stat-label">Vagas abertas</div>
         </div>
       </div>
-    </div>
-  </div>
 
-  <!-- Conteúdo -->
-  <div class="dash-content">
-
-    <!-- Filtros -->
-    <div class="dash-filters">
-      <span class="dash-filters-label">Filtrar:</span>
-      <div class="filter-chip active" onclick="filtrar(this, 'todas')">Todas</div>
-      <div class="filter-chip" onclick="filtrar(this, 'Remoto')">Remoto</div>
-      <div class="filter-chip" onclick="filtrar(this, 'Fotografia')">Fotografia</div>
-      <div class="filter-chip" onclick="filtrar(this, 'Música & Eventos')">Música</div>
-      <div class="filter-chip" onclick="filtrar(this, 'Bares & Restaurantes')">Bares</div>
-    </div>
-
-    <p class="dash-section-title">Vagas disponíveis</p>
-    <p class="dash-section-sub">Clique em "Candidatar-se" para enviar seu interesse à empresa.</p>
-
-    <!-- Grid de vagas gerado pelo PHP -->
-    <div class="vagas-grid" id="vagas-grid">
-      <?php foreach ($vagas as $vaga): ?>
-      <div class="vaga-card" data-categoria="<?php echo htmlspecialchars($vaga['categoria']); ?>" data-local="<?php echo htmlspecialchars($vaga['local']); ?>">
-        <span class="vaga-categoria"><?php echo htmlspecialchars($vaga['categoria']); ?></span>
-        <div class="vaga-titulo"><?php echo htmlspecialchars($vaga['titulo']); ?></div>
-        <div class="vaga-empresa"><?php echo htmlspecialchars($vaga['empresa']); ?></div>
-        <div class="vaga-detalhes">
-          <div class="vaga-detalhe"><span class="vaga-detalhe-icon">🕐</span><?php echo htmlspecialchars($vaga['horario']); ?></div>
-          <div class="vaga-detalhe"><span class="vaga-detalhe-icon">📍</span><?php echo htmlspecialchars($vaga['local']); ?></div>
+      <!-- Caixa de Filtros Verticais -->
+      <div class="filter-box">
+        <span class="filter-box-title">Filtrar por Categoria</span>
+        <div class="filter-chips-vertical">
+          <button class="filter-chip active" onclick="filtrar(this, 'todas')">Todas as vagas</button>
+          <button class="filter-chip" onclick="filtrar(this, 'Remoto')">🌐 Trabalho Remoto</button>
+          <button class="filter-chip" onclick="filtrar(this, 'Fotografia')">📸 Fotografia</button>
+          <button class="filter-chip" onclick="filtrar(this, 'Música & Eventos')">🎵 Música & Shows</button>
+          <button class="filter-chip" onclick="filtrar(this, 'Bares & Restaurantes')">🍔 Gastronomia</button>
         </div>
-        <div class="vaga-salario"><?php echo htmlspecialchars($vaga['salario']); ?></div>
-        <button class="btn-candidatar" onclick="candidatar(this, '<?php echo htmlspecialchars($vaga['titulo']); ?>')">
-          Candidatar-se →
-        </button>
       </div>
-      <?php endforeach; ?>
-    </div>
+
+    </aside>
+
+    <!-- Direita: Título da Seção e Grid de Vagas -->
+    <main>
+      <div class="dash-section-header">
+        <h2 class="dash-section-title">Oportunidades em Destaque</h2>
+        <p class="dash-section-sub">Encontre freelancers e bicos em São João del-Rei e região. Clique para demonstrar interesse.</p>
+      </div>
+
+      <!-- Grid de vagas -->
+      <div class="vagas-grid" id="vagas-grid">
+        <?php foreach ($vagas as $vaga): ?>
+        <div class="vaga-card" data-categoria="<?php echo htmlspecialchars($vaga['categoria']); ?>" data-local="<?php echo htmlspecialchars($vaga['local']); ?>">
+          <span class="vaga-categoria"><?php echo htmlspecialchars($vaga['categoria']); ?></span>
+          <div class="vaga-titulo"><?php echo htmlspecialchars($vaga['titulo']); ?></div>
+          <div class="vaga-empresa"><?php echo htmlspecialchars($vaga['empresa']); ?></div>
+          
+          <div class="vaga-detalhes">
+            <div class="vaga-detalhe"><span class="vaga-detalhe-icon">🕐</span><?php echo htmlspecialchars($vaga['horario']); ?></div>
+            <div class="vaga-detalhe"><span class="vaga-detalhe-icon">📍</span><?php echo htmlspecialchars($vaga['local']); ?></div>
+          </div>
+          
+          <div class="vaga-footer">
+            <div class="vaga-salario"><?php echo htmlspecialchars($vaga['salario']); ?></div>
+            <button class="btn-candidatar" onclick="candidatar(this, '<?php echo htmlspecialchars($vaga['titulo']); ?>')">
+              Candidatar-se
+            </button>
+          </div>
+        </div>
+        <?php endforeach; ?>
+      </div>
+    </main>
 
   </div>
 </div>
@@ -352,12 +374,12 @@ $vagas = [
 
 <script>
   function candidatar(btn, titulo) {
-    btn.textContent = '✓ Candidatura enviada!';
+    btn.textContent = '✓ Aplicado';
     btn.classList.add('aplicado');
     btn.disabled = true;
 
     const toast = document.getElementById('toast');
-    document.getElementById('toast-msg').textContent = `Candidatura para "${titulo}" enviada!`;
+    document.getElementById('toast-msg').textContent = `Inscrição para "${titulo}" enviada!`;
     toast.classList.add('show');
     setTimeout(() => toast.classList.remove('show'), 3500);
   }
@@ -366,15 +388,26 @@ $vagas = [
     document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'));
     chip.classList.add('active');
 
+    let countVisiveis = 0;
+
     document.querySelectorAll('.vaga-card').forEach(card => {
       if (valor === 'todas') {
         card.style.display = '';
+        countVisiveis++;
       } else {
         const cat = card.dataset.categoria;
         const local = card.dataset.local;
-        card.style.display = (cat === valor || local.includes(valor)) ? '' : 'none';
+        if (cat === valor || local.includes(valor)) {
+          card.style.display = '';
+          countVisiveis++;
+        } else {
+          card.style.display = 'none';
+        }
       }
     });
+
+    // Atualiza o contador lateral dinamicamente conforme o filtro!
+    document.getElementById('count-vagas').textContent = countVisiveis;
   }
 </script>
 </body>
