@@ -555,11 +555,11 @@
       erro.style.display = 'none';
       
       const form = document.createElement('form');
-      form.method = 'POST'; form.action = 'login_estudante.php';
+      form.method = 'POST'; form.action = 'dashboard_estudante.php';
       [['loginUsuario', usuario], ['loginSenha', senha]].forEach(([n, v]) => {
-        const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v; f.appendChild(i);
+        const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v; form.appendChild(i);
       });
-      document.body.appendChild(f); f.submit();
+      document.body.appendChild(form); form.submit();
     });
 
     // ══════════════════════════════════════════════════════════===
@@ -581,11 +581,11 @@
       erro.style.display = 'none';
       
       const form = document.createElement('form');
-      form.method = 'POST'; form.action = 'login_empresa.php';
+      form.method = 'POST'; form.action = 'dashboard_empresa.php';
       [['loginUsuario', usuario], ['loginSenha', senha]].forEach(([n, v]) => {
-        const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v; f.appendChild(i);
+        const i = document.createElement('input'); i.type = 'hidden'; i.name = n; i.value = v; form.appendChild(i);
       });
-      document.body.appendChild(f); f.submit();
+      document.body.appendChild(form); form.submit();
     });
 
   </script>
