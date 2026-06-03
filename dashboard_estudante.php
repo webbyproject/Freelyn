@@ -307,7 +307,7 @@ $vagas = [
       <!-- Bloco de Boas-vindas Mesclado -->
       <div class="dash-sidebar-welcome">
         <span class="greeting-tag">Painel de Vagas</span>
-        <h1>Olá, <em><?php echo htmlspecialchars($primeiroNome); ?></em>!</h1>
+        <h1>Olá, <em><?php echo htmlspecialchars($primeiroNome); ?></em></h1>
       </div>
       
       <!-- Card Vagas Disponíveis -->
