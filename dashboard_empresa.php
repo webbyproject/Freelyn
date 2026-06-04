@@ -315,35 +315,51 @@ $vagasPublicadas = [
             </div>
             <div class="vaga-pub-footer">
                 <div class="vaga-pub-candidatos">Candidatos: <span><?php echo $vp['candidatos']; ?></span></div>
-                <button class="btn-ver-candidatos" onclick="toggleCandidatos(this, 'cands-<?php echo $index; ?>')">
-                    Ver candidatos <i class="fas fa-chevron-down" style="margin-left:5px; font-size: 0.7rem;"></i>
+                <button class="btn-ver-candidatos" onclick="toggleCandidatos(this, 'lista-vaga-<?php echo $index; ?>')">
+                    Ver candidatos <i class="fas fa-chevron-down" style="margin-left:5px;"></i>
                 </button>
             </div>
 
-            <div id="cands-<?php echo $index; ?>" class="candidatos-lista">
-                <h3 style="font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin-bottom: 15px;">Interessados nesta vaga:</h3>
-                
-                <div class="candidato-item">
-                    <div class="candidato-info">
-                        <h4>João Pedro Lima</h4>
-                        <div class="habilidades-tags">
-                            <span class="tag-habilidade">Pontualidade</span>
-                            <span class="tag-habilidade">Experiência em Buffet</span>
-                        </div>
-                    </div>
-                    <button class="btn-ver-candidatos" style="background: var(--navy); padding: 5px 12px; font-size: 0.7rem;">Contratar</button>
-                </div>
+            <div id="lista-vaga-<?php echo $index; ?>" class="candidatos-lista">
+                <h3 style="font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin-bottom: 15px; padding-top: 10px;">
+                    Interessados nesta vaga:
+                </h3>
 
-                <div class="candidato-item">
-                    <div class="candidato-info">
-                        <h4>Ana Clara Souza</h4>
-                        <div class="habilidades-tags">
-                            <span class="tag-habilidade">Comunicação</span>
-                            <span class="tag-habilidade">Inglês Básico</span>
+                <?php 
+                // LÓGICA DE SEPARAÇÃO DOS NOMES
+                if ($vp['titulo'] == 'Auxiliar de Cozinha') {
+                    // Candidatos exclusivos para Auxiliar de Cozinha
+                    $candidatos = [
+                        ['nome' => 'Marcos Oliveira', 'tags' => ['Higiene', 'Agilidade', 'Cortes']],
+                        ['nome' => 'Beatriz Souza', 'tags' => ['Organização', 'Pratos Quentes']],
+                        ['nome' => 'Ricardo Santos', 'tags' => ['Limpeza', 'Trabalho em Equipe']],
+                        ['nome' => 'Fernanda Lima', 'tags' => ['Sobremesas', 'Estoque']],
+                        ['nome' => 'Thiago Rocha', 'tags' => ['Frituras', 'Disponibilidade']]
+                    ];
+                } else {
+                    // Candidatos diferentes para as demais vagas (ex: Garçom)
+                    $candidatos = [
+                        ['nome' => 'Juliana Paiva', 'tags' => ['Atendimento', 'Simpatia']],
+                        ['nome' => 'Lucas Ferreira', 'tags' => ['Experiência', 'Vendas']],
+                        ['nome' => 'Rafael Costa', 'tags' => ['Pontualidade', 'Inglês']]
+                    ];
+                }
+
+                foreach ($candidatos as $cand): ?>
+                    <div class="candidato-item">
+                        <div class="candidato-info">
+                            <h4><?php echo $cand['nome']; ?></h4>
+                            <div class="habilidades-tags">
+                                <?php foreach ($cand['tags'] as $tag): ?>
+                                    <span class="tag-habilidade"><?php echo $tag; ?></span>
+                                <?php endforeach; ?>
+                            </div>
                         </div>
+                        <button class="btn-ver-candidatos" style="background: var(--navy); padding: 5px 12px; font-size: 0.7rem; border-radius: 6px;">
+                            Contratar
+                        </button>
                     </div>
-                    <button class="btn-ver-candidatos" style="background: var(--navy); padding: 5px 12px; font-size: 0.7rem;">Contratar</button>
-                </div>
+                <?php endforeach; ?>
             </div>
         </div>
       <?php endforeach; ?>
