@@ -303,21 +303,49 @@ $vagasPublicadas = [
       </div>
       <?php endif; ?>
 
-      <?php foreach ($vagasPublicadas as $vp): ?>
-      <div class="vaga-pub-card">
-        <div class="vaga-pub-header">
-          <span class="vaga-pub-titulo"><?php echo htmlspecialchars($vp['titulo']); ?></span>
-          <span class="vaga-pub-categoria"><?php echo htmlspecialchars($vp['categoria']); ?></span>
+      <?php foreach ($vagasPublicadas as $index => $vp): ?>
+        <div class="vaga-pub-card">
+            <div class="vaga-pub-header">
+                <span class="vaga-pub-titulo"><?php echo htmlspecialchars($vp['titulo']); ?></span>
+                <span class="vaga-pub-categoria"><?php echo htmlspecialchars($vp['categoria']); ?></span>
+            </div>
+            <div class="vaga-pub-detalhes">
+                <div class="vaga-pub-detalhe">🕐 <?php echo htmlspecialchars($vp['horario']); ?></div>
+                <div class="vaga-pub-detalhe">💰 <?php echo htmlspecialchars($vp['salario']); ?></div>
+            </div>
+            <div class="vaga-pub-footer">
+                <div class="vaga-pub-candidatos">Candidatos: <span><?php echo $vp['candidatos']; ?></span></div>
+                <button class="btn-ver-candidatos" onclick="toggleCandidatos(this, 'cands-<?php echo $index; ?>')">
+                    Ver candidatos <i class="fas fa-chevron-down" style="margin-left:5px; font-size: 0.7rem;"></i>
+                </button>
+            </div>
+
+            <div id="cands-<?php echo $index; ?>" class="candidatos-lista">
+                <h3 style="font-size: 0.8rem; text-transform: uppercase; color: var(--muted); margin-bottom: 15px;">Interessados nesta vaga:</h3>
+                
+                <div class="candidato-item">
+                    <div class="candidato-info">
+                        <h4>João Pedro Lima</h4>
+                        <div class="habilidades-tags">
+                            <span class="tag-habilidade">Pontualidade</span>
+                            <span class="tag-habilidade">Experiência em Buffet</span>
+                        </div>
+                    </div>
+                    <button class="btn-ver-candidatos" style="background: var(--navy); padding: 5px 12px; font-size: 0.7rem;">Contratar</button>
+                </div>
+
+                <div class="candidato-item">
+                    <div class="candidato-info">
+                        <h4>Ana Clara Souza</h4>
+                        <div class="habilidades-tags">
+                            <span class="tag-habilidade">Comunicação</span>
+                            <span class="tag-habilidade">Inglês Básico</span>
+                        </div>
+                    </div>
+                    <button class="btn-ver-candidatos" style="background: var(--navy); padding: 5px 12px; font-size: 0.7rem;">Contratar</button>
+                </div>
+            </div>
         </div>
-        <div class="vaga-pub-detalhes">
-          <div class="vaga-pub-detalhe">🕐 <?php echo htmlspecialchars($vp['horario']); ?></div>
-          <div class="vaga-pub-detalhe">💰 <?php echo htmlspecialchars($vp['salario']); ?></div>
-        </div>
-        <div class="vaga-pub-footer">
-          <div class="vaga-pub-candidatos">Candidatos: <span><?php echo $vp['candidatos']; ?></span></div>
-          <button class="btn-ver-candidatos">Ver candidatos</button>
-        </div>
-      </div>
       <?php endforeach; ?>
 
       <?php if (!$vagaPostada && empty($vagasPublicadas)): ?>
@@ -330,5 +358,24 @@ $vagasPublicadas = [
     </div>
   </div>
 </div>
+<script>
+function toggleCandidatos(btn, idLista) {
+    const lista = document.getElementById(idLista);
+    const icone = btn.querySelector('i');
+    
+    // Fecha outras listas que possam estar abertas (opcional)
+    // document.querySelectorAll('.candidatos-lista').forEach(l => { if(l.id !== idLista) l.classList.remove('aberta'); });
+
+    // Alterna a classe que faz deslizar
+    lista.classList.toggle('aberta');
+
+    // Muda o texto e o ícone
+    if (lista.classList.contains('aberta')) {
+        btn.innerHTML = 'Ocultar <i class="fas fa-chevron-up" style="margin-left:5px; font-size: 0.7rem;"></i>';
+    } else {
+        btn.innerHTML = 'Ver candidatos <i class="fas fa-chevron-down" style="margin-left:5px; font-size: 0.7rem;"></i>';
+    }
+}
+</script>
 </body>
 </html>

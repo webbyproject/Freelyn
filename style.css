@@ -700,3 +700,50 @@
   justify-content: c;
  
 }
+
+/* Área de Candidatos (Escondida por padrão) */
+.candidatos-lista {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out; /* A animação de deslizar */
+    background: #f9fbfc;
+    border-radius: 0 0 14px 14px;
+    margin: 0 -26px -24px -26px; /* Ajuste para preencher o card pai */
+}
+
+/* Quando estiver aberta */
+.candidatos-lista.aberta {
+    max-height: 1000px; /* Um valor alto para permitir expansão */
+    border-top: 1px dashed var(--sand);
+    padding: 20px;
+    margin-top: 15px;
+}
+
+.candidato-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 0;
+    border-bottom: 1px solid rgba(28,43,58,0.05);
+}
+
+.candidato-info h4 {
+    font-size: 0.9rem;
+    color: var(--navy);
+    margin-bottom: 4px;
+}
+
+.habilidades-tags {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+}
+
+.tag-habilidade {
+    font-size: 0.65rem;
+    background: var(--sky);
+    color: var(--navy);
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-weight: 600;
+}
