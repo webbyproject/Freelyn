@@ -359,21 +359,20 @@ $vagasPublicadas = [
   </div>
 </div>
 <script>
-function toggleCandidatos(btn, idLista) {
-    const lista = document.getElementById(idLista);
+function toggleCandidatos(btn, id) {
+    const lista = document.getElementById(id);
     const icone = btn.querySelector('i');
     
-    // Fecha outras listas que possam estar abertas (opcional)
-    // document.querySelectorAll('.candidatos-lista').forEach(l => { if(l.id !== idLista) l.classList.remove('aberta'); });
+    // Verifica se está abrindo ou fechando
+    const estaFechado = !lista.classList.contains('aberta');
 
-    // Alterna a classe que faz deslizar
-    lista.classList.toggle('aberta');
-
-    // Muda o texto e o ícone
-    if (lista.classList.contains('aberta')) {
-        btn.innerHTML = 'Ocultar <i class="fas fa-chevron-up" style="margin-left:5px; font-size: 0.7rem;"></i>';
+    if (estaFechado) {
+        lista.classList.add('aberta');
+        btn.innerHTML = 'Fechar lista <i class="fas fa-chevron-up" style="margin-left:5px; transition: 0.3s"></i>';
+        // Opcional: rotacionar o ícone via CSS se preferir manter o innerHTML original
     } else {
-        btn.innerHTML = 'Ver candidatos <i class="fas fa-chevron-down" style="margin-left:5px; font-size: 0.7rem;"></i>';
+        lista.classList.remove('aberta');
+        btn.innerHTML = 'Ver candidatos <i class="fas fa-chevron-down" style="margin-left:5px; transition: 0.3s"></i>';
     }
 }
 </script>

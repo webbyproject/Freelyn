@@ -702,21 +702,26 @@
 }
 
 /* Área de Candidatos (Escondida por padrão) */
+/* Container da lista com deslize fluido */
 .candidatos-lista {
     max-height: 0;
     overflow: hidden;
-    transition: max-height 0.5s ease-out; /* A animação de deslizar */
-    background: #f9fbfc;
-    border-radius: 0 0 14px 14px;
-    margin: 0 -26px -24px -26px; /* Ajuste para preencher o card pai */
+    /* Cubic-bezier faz a animação começar rápida e parar suavemente */
+    transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.3s ease;
+    background: #fdfdfd;
+    opacity: 0;
+    visibility: hidden;
 }
 
-/* Quando estiver aberta */
+/* Quando a lista abre */
 .candidatos-lista.aberta {
-    max-height: 1000px; /* Um valor alto para permitir expansão */
-    border-top: 1px dashed var(--sand);
-    padding: 20px;
-    margin-top: 15px;
+    max-height: 500px; /* Reduzi para um valor mais próximo do real */
+    opacity: 1;
+    visibility: visible;
+    padding: 20px 26px;
+    border-top: 1px solid var(--sand);
+    border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 }
 
 .candidato-item {
