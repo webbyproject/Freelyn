@@ -1,18 +1,37 @@
 <?php
 session_start();
 
-// Simula sessão para teste sem banco de dados caso não exista nada na Session
-if (empty($_SESSION['logado'])) {
-    $_SESSION['logado'] = true;
-    $_SESSION['nome']   = 'Maria Silva';
-    $_SESSION['tipo']   = 'estudante';
+// ── Origem 1: vindo do login (POST direto)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['loginUsuario'])) {
+    $_SESSION['logado']  = true;
+    $_SESSION['tipo']    = 'estudante';
+    $_SESSION['nome']    = $_POST['loginUsuario'];
+    $_SESSION['usuario'] = $_POST['loginUsuario'];
+    $_SESSION['cadastro_novo'] = false;
 }
 
-// Para pegar os dados do formulário POST ou herdar da sessão simulada
-$nomeCompleto = $_POST["loginUsuario"] ?? $_SESSION['nome'] ?? 'Usuário';
+// ── Origem 2: vindo do cadastro (sessão já preenchida por processa.php)
+// (nada a fazer — a sessão já está pronta)
+
+// ── Origem 3: sem sessão (acesso direto / demo)
+if (empty($_SESSION['logado'])) {
+    $_SESSION['logado']        = true;
+    $_SESSION['nome']          = 'Maria Silva';
+    $_SESSION['tipo']          = 'estudante';
+    $_SESSION['cadastro_novo'] = false;
+}
+
+$nomeCompleto  = $_SESSION['nome']    ?? 'Usuário';
+$usuario       = $_SESSION['usuario'] ?? '';
+$email         = $_SESSION['email']   ?? '';
+$cpf           = $_SESSION['cpf']     ?? '';
+$cadastroNovo  = $_SESSION['cadastro_novo'] ?? false;
+
+// Limpa a flag para não reexibir na próxima recarga
+$_SESSION['cadastro_novo'] = false;
 
 // Divide o nome com segurança
-$partesNome = explode(' ', trim($nomeCompleto));
+$partesNome   = explode(' ', trim($nomeCompleto));
 $primeiroNome = !empty($partesNome[0]) ? $partesNome[0] : 'Usuário';
 
 // Vagas simuladas (sem banco de dados)
@@ -267,6 +286,51 @@ $vagas = [
       cursor: default; transform: none; box-shadow: none;
     }
 
+    /* ── Banner de boas-vindas ── */
+    .banner-cadastro {
+      background: linear-gradient(90deg, #e8f5e9 0%, #f0fdf4 100%);
+      border-bottom: 2px solid #86efac;
+      padding: 14px 5%;
+      display: flex; align-items: center; justify-content: space-between;
+      gap: 12px;
+    }
+    .banner-inner {
+      display: flex; align-items: center; gap: 14px;
+    }
+    .banner-emoji { font-size: 1.6rem; }
+    .banner-inner strong {
+      display: block; font-size: .95rem; font-weight: 700; color: #166534;
+    }
+    .banner-inner span {
+      font-size: .82rem; color: #4b7a5a;
+    }
+    .banner-close {
+      background: none; border: none; font-size: 1rem;
+      color: #4b7a5a; cursor: pointer; opacity: .7; flex-shrink: 0;
+    }
+    .banner-close:hover { opacity: 1; }
+
+    /* ── Card de Perfil na Sidebar ── */
+    .profile-card-dash {
+      background: var(--white); border-radius: 14px; padding: 20px;
+      box-shadow: 0 4px 20px rgba(28,43,58,.03); border: 1px solid var(--sand);
+    }
+    .profile-card-dash-title {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      display: block; margin-bottom: 12px;
+    }
+    .profile-card-dash-row {
+      display: flex; align-items: center; gap: 10px;
+      font-size: .82rem; color: var(--text); padding: 5px 0;
+      border-bottom: 1px solid var(--cream);
+    }
+    .profile-card-dash-row:last-child { border-bottom: none; }
+    .profile-card-dash-row strong {
+      font-size: .7rem; text-transform: uppercase;
+      letter-spacing: .06em; color: var(--muted); min-width: 52px;
+    }
+
     /* ── Toast de confirmação ── */
     .toast {
       position: fixed; bottom: 28px; right: 28px; z-index: 999;
@@ -298,6 +362,20 @@ $vagas = [
     </div>
   </nav>
 
+  <!-- Banner de boas-vindas após cadastro -->
+  <?php if ($cadastroNovo): ?>
+  <div class="banner-cadastro" id="banner-boas-vindas">
+    <div class="banner-inner">
+      <span class="banner-emoji">🎉</span>
+      <div>
+        <strong>Cadastro realizado com sucesso, <?php echo htmlspecialchars($primeiroNome); ?>!</strong>
+        <span>Bem-vindo(a) à comunidade FreelynSJ. Explore as vagas abaixo.</span>
+      </div>
+    </div>
+    <button class="banner-close" onclick="document.getElementById('banner-boas-vindas').style.display='none'" aria-label="Fechar">✕</button>
+  </div>
+  <?php endif; ?>
+
   <!-- Estrutura Principal Dividida (Sem a Hero antiga) -->
   <div class="dash-main-layout">
     
@@ -320,6 +398,29 @@ $vagas = [
           <div class="dash-stat-label">Vagas abertas</div>
         </div>
       </div>
+      
+
+      <!-- Card de Perfil (dados do cadastro/login) -->
+      <?php if (!empty($email) || !empty($usuario) || !empty($cpf)): ?>
+      <div class="profile-card-dash">
+        <span class="profile-card-dash-title">Meu Perfil</span>
+        <?php if (!empty($usuario)): ?>
+        <div class="profile-card-dash-row">
+          <strong>Usuário</strong> <?php echo htmlspecialchars($usuario); ?>
+        </div>
+        <?php endif; ?>
+        <?php if (!empty($email)): ?>
+        <div class="profile-card-dash-row">
+          <strong>E-mail</strong> <?php echo htmlspecialchars($email); ?>
+        </div>
+        <?php endif; ?>
+        <?php if (!empty($cpf)): ?>
+        <div class="profile-card-dash-row">
+          <strong>CPF</strong> <?php echo htmlspecialchars($cpf); ?>
+        </div>
+        <?php endif; ?>
+      </div>
+      <?php endif; ?>
 
       <!-- Caixa de Filtros Verticais -->
       <div class="filter-box">

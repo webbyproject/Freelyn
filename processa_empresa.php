@@ -2,14 +2,14 @@
 session_start();
 
 // RECEBE OS DADOS ENVIADOS PELO FORMULÁRIO POST
-$nome    = trim($_POST["nomeCadastro"] ?? '');
-$cpf     = trim($_POST["cpf"]         ?? '');
-$usuario = trim($_POST["usuario"]     ?? '');
-$email   = trim($_POST["email"]       ?? '');
-$senha   = $_POST["senha"]            ?? '';
+$nomeEmpresa = trim($_POST["nomeEmpresa"] ?? '');
+$cnpj        = trim($_POST["cnpj"]        ?? '');
+$usuario     = trim($_POST["usuario"]     ?? '');
+$email       = trim($_POST["email"]       ?? '');
+$senha       = $_POST["senha"]            ?? '';
 
 // VALIDAÇÃO: campos vazios
-if (empty($nome) || empty($cpf) || empty($usuario) || empty($email) || empty($senha)) {
+if (empty($nomeEmpresa) || empty($cnpj) || empty($usuario) || empty($email) || empty($senha)) {
     $erro = "Erro! Por favor, preencha todos os campos!";
 }
 // VALIDAÇÃO: senha curta
@@ -18,16 +18,16 @@ elseif (strlen($senha) < 8) {
 }
 else {
     // Guarda os dados do cadastro na sessão
-    $_SESSION['logado']   = true;
-    $_SESSION['tipo']     = 'estudante';
-    $_SESSION['nome']     = $nome;
-    $_SESSION['usuario']  = $usuario;
-    $_SESSION['email']    = $email;
-    $_SESSION['cpf']      = $cpf;
+    $_SESSION['logado']        = true;
+    $_SESSION['tipo']          = 'empresa';
+    $_SESSION['nome']          = $nomeEmpresa;
+    $_SESSION['usuario']       = $usuario;
+    $_SESSION['email']         = $email;
+    $_SESSION['cnpj']          = $cnpj;
     $_SESSION['cadastro_novo'] = true; // flag para exibir boas-vindas
 
     // Redireciona para o dashboard com os dados
-    header("Location: dashboard_estudante.php");
+    header("Location: dashboard_empresa.php");
     exit;
 }
 ?>
@@ -35,7 +35,7 @@ else {
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <title>FreelynSJ — Cadastro</title>
+  <title>FreelynSJ — Cadastro de Empresa</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>

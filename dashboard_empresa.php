@@ -1,23 +1,36 @@
 <?php
 session_start();
 
-// Para pegar os dados do formulário
-if ($_SERVER["REQUEST_METHOD"] === "POST") {
-    $nome = $_POST["loginUsuarioEm"] ?? '';
-    $senha = $_POST["loginSenhaEm"] ?? '';
+// ── Origem 1: vindo do login (POST direto)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['loginUsuarioEm'])) {
+    $_SESSION['logado']        = true;
+    $_SESSION['tipo']          = 'empresa';
+    $_SESSION['nome']          = $_POST['loginUsuarioEm'];
+    $_SESSION['usuario']       = $_POST['loginUsuarioEm'];
+    $_SESSION['cadastro_novo'] = false;
 }
 
+// ── Origem 2: vindo do cadastro (sessão já preenchida por processa_empresa.php)
+// (nada a fazer — a sessão já está pronta)
 
-// Simula sessão para teste sem banco de dados
+// ── Origem 3: sem sessão (acesso direto / demo)
 if (empty($_SESSION['logado'])) {
-    $_SESSION['logado'] = true;
-    $_SESSION['nome']   = 'Padaria do João';
-    $_SESSION['tipo']   = 'empresa';
+    $_SESSION['logado']        = true;
+    $_SESSION['nome']          = 'Padaria do João';
+    $_SESSION['tipo']          = 'empresa';
+    $_SESSION['cadastro_novo'] = false;
 }
 
+$nomeEmpresa  = $_SESSION['nome']    ?? 'Empresa';
+$usuario      = $_SESSION['usuario'] ?? '';
+$email        = $_SESSION['email']   ?? '';
+$cnpj         = $_SESSION['cnpj']    ?? '';
+$cadastroNovo = $_SESSION['cadastro_novo'] ?? false;
 
+// Limpa a flag para não reexibir na próxima recarga
+$_SESSION['cadastro_novo'] = false;
 
-$nomeEmpresa = $nome;
+$primeiroNome = explode(' ', trim($nomeEmpresa))[0] ?? $nomeEmpresa;
 
 
 // Vaga recém postada (simulado via POST)
@@ -166,6 +179,41 @@ $vagasPublicadas = [
     }
     .btn-ver-candidatos:hover { background: var(--terracota); }
 
+    /* ── Banner de boas-vindas ── */
+    .banner-cadastro {
+      background: linear-gradient(90deg, #D9E4F0 0%, #eef3fa 100%);
+      border-bottom: 2px solid var(--sky);
+      padding: 14px 5%;
+      display: flex; align-items: center; justify-content: space-between; gap: 12px;
+    }
+    .banner-inner { display: flex; align-items: center; gap: 14px; }
+    .banner-emoji { font-size: 1.6rem; }
+    .banner-inner strong { display: block; font-size: .95rem; font-weight: 700; color: var(--navy); }
+    .banner-inner span { font-size: .82rem; color: #4a6179; }
+    .banner-close { background: none; border: none; font-size: 1rem; color: var(--navy); cursor: pointer; opacity: .7; flex-shrink: 0; }
+    .banner-close:hover { opacity: 1; }
+
+    /* ── Card de Perfil inline no form-card ── */
+    .profile-info-card {
+      background: var(--cream); border-radius: 10px; padding: 16px;
+      margin-bottom: 20px; border: 1px solid var(--sand);
+    }
+    .profile-info-card-title {
+      font-size: .7rem; font-weight: 700; letter-spacing: .1em;
+      text-transform: uppercase; color: var(--muted);
+      display: block; margin-bottom: 10px;
+    }
+    .profile-info-row {
+      display: flex; gap: 8px; align-items: baseline;
+      font-size: .82rem; color: var(--text); padding: 4px 0;
+      border-bottom: 1px dashed #dde3ec;
+    }
+    .profile-info-row:last-child { border-bottom: none; }
+    .profile-info-row strong {
+      font-size: .7rem; text-transform: uppercase;
+      letter-spacing: .05em; color: var(--muted); min-width: 52px;
+    }
+
     /* Vaga nova (recém postada) */
     .vaga-pub-card.nova { border-left-color: var(--orange); background: #fffaf7; }
     .badge-nova { display: inline-block; background: var(--orange); color: var(--white); font-size: .65rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase; padding: 2px 8px; border-radius: 4px; margin-left: 8px; vertical-align: middle; }
@@ -197,6 +245,20 @@ $vagasPublicadas = [
 
 
 
+  <!-- Banner de boas-vindas após cadastro -->
+  <?php if ($cadastroNovo): ?>
+  <div class="banner-cadastro" id="banner-boas-vindas">
+    <div class="banner-inner">
+      <span class="banner-emoji">🎉</span>
+      <div>
+        <strong>Empresa cadastrada com sucesso, <?php echo htmlspecialchars($nomeEmpresa); ?>!</strong>
+        <span>Tudo pronto para publicar vagas e encontrar freelancers em São João del-Rei.</span>
+      </div>
+    </div>
+    <button class="banner-close" onclick="document.getElementById('banner-boas-vindas').style.display='none'" aria-label="Fechar">✕</button>
+  </div>
+  <?php endif; ?>
+
   <!-- Conteúdo: 2 colunas -->
   <div class="dash-content">
 
@@ -215,6 +277,22 @@ $vagasPublicadas = [
             <span class="alerta-sucesso-icon">🎉</span>
             Vaga "<?php echo htmlspecialchars($vagaPostada['titulo']); ?>" publicada com sucesso!
           </div>
+        <?php endif; ?>
+
+        <!-- Dados cadastrais da empresa -->
+        <?php if (!empty($email) || !empty($usuario) || !empty($cnpj)): ?>
+        <div class="profile-info-card">
+          <span class="profile-info-card-title">Dados da Conta</span>
+          <?php if (!empty($usuario)): ?>
+          <div class="profile-info-row"><strong>Usuário</strong> <?php echo htmlspecialchars($usuario); ?></div>
+          <?php endif; ?>
+          <?php if (!empty($email)): ?>
+          <div class="profile-info-row"><strong>E-mail</strong> <?php echo htmlspecialchars($email); ?></div>
+          <?php endif; ?>
+          <?php if (!empty($cnpj)): ?>
+          <div class="profile-info-row"><strong>CNPJ</strong> <?php echo htmlspecialchars($cnpj); ?></div>
+          <?php endif; ?>
+        </div>
         <?php endif; ?>
 
         <form method="POST" >
@@ -259,7 +337,7 @@ $vagasPublicadas = [
       </div>
     </div>
 
-    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    <?php if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['titulo'])) {
       $titulo    = trim($_POST['titulo']    ?? '');
       $descricao = trim($_POST['descricao'] ?? '');
       $salario   = trim($_POST['salario']   ?? '');
@@ -384,7 +462,7 @@ function toggleCandidatos(btn, id) {
 
     if (estaFechado) {
         lista.classList.add('aberta');
-        btn.innerHTML = 'Fechar lista <i class="fas fa-chevron-up" style="margin-left:5px; transition: 0.3s"></i>';
+        btn.innerHTML = 'Ocultar <i class="fas fa-chevron-up" style="margin-left:5px; transition: 0.3s"></i>';
         // Opcional: rotacionar o ícone via CSS se preferir manter o innerHTML original
     } else {
         lista.classList.remove('aberta');
