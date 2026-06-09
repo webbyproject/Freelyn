@@ -23,7 +23,7 @@
       <!-- Alternador de Abas Dinâmico -->
       <div class="nav-tabs">
         <div class="nav-tab active" data-type="estudante">Sou Estudante</div>
-        <div class="nav-tab active2" data-type="empresa">Sou Empresa</div>
+        <div class="nav-tab" data-type="empresa">Sou Empresa</div>
       </div> <!-- /fim .nav-tabs -->
       
       <!-- Botões de Login e Cadastro -->
@@ -307,7 +307,6 @@
       <div class="login-header login-header-estudante">
         <div class="divareaest">
           <p class="login-header-label">Área do Freelancer</p>
-          
         </div>
       </div>
 
@@ -347,11 +346,7 @@
 
       <!-- Cabeçalho azul -->
       <div class="divareaem">
-        
-        <div>
-          <p class="login-header-label02">Área do Empregador</p>
-          
-        </div>
+        <p class="login-header-label02">Área do Empregador</p>
       </div>
 
       <!-- Divisória linha.png com tint azul -->
@@ -399,15 +394,23 @@
     // Efeito visual nas abas da navbar
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        tabs.forEach(t => t.classList.remove('active'));
+        tabs.forEach(t => {
+          t.classList.remove('active');
+          t.style.removeProperty('--tab-color');
+          t.style.removeProperty('--tab-shadow');
+        });
         tab.classList.add('active');
 
-        // Muda cor do botão Cadastro conforme perfil selecionado
+        // Muda cor da aba e do botão Cadastro conforme perfil selecionado
         const tipo = tab.dataset.type;
         if (tipo === 'empresa') {
+          tab.style.setProperty('--tab-color', 'var(--navy)');
+          tab.style.setProperty('--tab-shadow', 'rgba(28,43,58,.35)');
           btnCadastro.style.background = 'var(--navy)';
           btnCadastro.style.boxShadow  = '0 4px 14px rgba(28,43,58,.35)';
         } else {
+          tab.style.setProperty('--tab-color', 'var(--orange)');
+          tab.style.setProperty('--tab-shadow', 'rgba(212,116,58,.35)');
           btnCadastro.style.background = 'var(--orange)';
           btnCadastro.style.boxShadow  = '0 4px 14px rgba(212,116,58,.35)';
         }
